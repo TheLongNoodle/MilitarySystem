@@ -1,7 +1,7 @@
 #ifndef UNIT_H
 #define UNIT_H
 
-#include "Soldier.h"
+class Soldier;
 
 class Unit {
 private:

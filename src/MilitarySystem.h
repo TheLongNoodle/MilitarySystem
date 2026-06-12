@@ -1,14 +1,13 @@
 #ifndef MILITARY_SYSTEM_H
 #define MILITARY_SYSTEM_H
 
-#include "Base.h"
-#include "Date.h"
+#include "BaseFacility.h"
 #include "Soldier.h"
 #include "Equipment.h"
 #include "TrainingMission.h"
 #include "Report.h"
 
-class Person;
+class Date;
 class Unit;
 class Vehicle;
 class Warehouse;
@@ -16,15 +15,19 @@ class Mission;
 
 class MilitarySystem {
 private:
-    Person**    people;
-    int         peopleCount;
-    int         peopleCapacity;
+    Soldier**   soldiers;
+    int         soldiersCount;
+    int         soldiersCapacity;
+
+    Unit**      units;
+    int         unitsCount;
+    int         unitsCapacity;
 
     Mission**   missions;
     int         missionsCount;
     int         missionsCapacity;
 
-    Base base;
+    BaseFacility base;
 
 public:
     MilitarySystem();
@@ -41,28 +44,21 @@ public:
                     const Date& birthDate,
                     const char* role,
                     Soldier::eRank rank);
-    Soldier* findSoldier(int personalNumber) const;
+    const Soldier* findSoldier(int personalNumber) const;
 
     bool addUnit(const char* unitName);
-    Unit* findUnit(int unitId) const;
+    const Unit* findUnit(int unitId) const;
     bool assignSoldierToUnit(int personalNumber, int unitId);
     bool transferSoldier(int personalNumber, int newUnitId);
 
     bool addWarehouse(const char* name);
-    Warehouse* findWarehouse(const char* name) const;
-    void printAllWarehouses() const;
-    bool warehouseExists(const char* name) const;
+    const Warehouse* findWarehouse(const char* name) const;
     bool addEquipment(const char* warehouseName,
                       const char* equipmentName,
                       const char* serialNumber,
                       int quantity,
                       Equipment::eEquipmentStatus status);
 
-    bool addJeep(const char* vehicleNumber, int maxPassengers);
-    bool addTruck(const char* vehicleNumber, double maxWeightKG);
-    bool addArmoredTransport(const char* vehicleNumber,
-                             int maxPassengers,
-                             double maxWeightKG);
     Vehicle* findVehicle(const char* vehicleNumber) const;
     bool setVehicleDriver(const char* vehicleNumber, int personalNumber);
 
@@ -77,10 +73,12 @@ public:
                              const char* warehouseName,
                              const char* equipmentName);
 
-    const Base& getBase() const;
+    BaseFacility&       getBase();
+    const BaseFacility& getBase() const;
 
     void printAllUnits() const;
-    void printAllVehicles() const;
+    void printAllMissions() const;
+    int  getMissionsCount() const;
     Report generateReport() const;
     void   printAllData() const;
 };

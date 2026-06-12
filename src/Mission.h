@@ -34,8 +34,7 @@ public:
     bool setMissionName(const char* missionName);
     bool setStatus(eMissionStatus newStatus);
 
-    // virtual 
-    void print() const = 0;
+    virtual void print() const = 0;
 };
 
 #endif // MISSION_H

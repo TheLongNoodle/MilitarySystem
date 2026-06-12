@@ -2,7 +2,7 @@
 #define LOGISTICS_MISSION_H
 
 #include "Mission.h"
-#include "Equipment.h"
+class Equipment;
 
 class Vehicle;
 

@@ -1,7 +1,7 @@
 #ifndef WAREHOUSE_H
 #define WAREHOUSE_H
 
-#include "Equipment.h"
+class Equipment;
 
 class Warehouse {
 private:

@@ -1,11 +1,11 @@
 #ifndef SOLDIER_H
 #define SOLDIER_H
 
-#include "Person.h"
+#include "Date.h"
 
 class Unit;
 
-class Soldier : public Person {
+class Soldier {
 public:
     enum class eRank {
         PRIVATE,
@@ -17,7 +17,12 @@ public:
     };
 
 private:
+    static int s_nextId;
     static int s_nextPersonalNumber;
+
+    char* name;
+    int   id;
+    Date  birthDate;
 
     int   personalNumber;
     char* role;
@@ -29,21 +34,26 @@ public:
             const Date& birthDate,
             const char* role,
             eRank rank);
-    ~Soldier();
+    virtual ~Soldier();
 
     Soldier(const Soldier& other) = delete;
     Soldier& operator=(const Soldier& other) = delete;
 
+    const char* getName() const;
+    int         getId() const;
+    const Date& getBirthDate() const;
     int         getPersonalNumber() const;
     const char* getRole() const;
     eRank       getRank() const;
     Unit*       getUnit() const;
 
+    bool setName(const char* name);
+    bool setBirthDate(const Date& birthDate);
     bool setRole(const char* role);
     bool setRank(eRank rank);
     bool setUnit(Unit* newUnit);
 
-    void print() const override;
+    virtual void print() const;
 };
 
 #endif // SOLDIER_H

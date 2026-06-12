@@ -2,7 +2,7 @@
 #define TRUCK_H
 
 #include "Vehicle.h"
-#include "Equipment.h"
+class Equipment;
 
 class Truck : virtual public Vehicle {
 private:

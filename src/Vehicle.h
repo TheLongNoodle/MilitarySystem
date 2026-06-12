@@ -29,8 +29,7 @@ public:
     bool sendToMaintenance();
     bool setDriver(Soldier* driver);
 
-    // virtual 
-    void print() const = 0;
+    virtual void print() const = 0;
 };
 
 #endif // VEHICLE_H
