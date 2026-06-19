@@ -1,293 +1,35 @@
 ﻿  main.cpp
-C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5): error C2679: binary '>>': no operator found which takes a right-hand operand of type 'char *' (or there is no acceptable conversion)
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(313,39):
-      could be 'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(std::basic_streambuf<char,std::char_traits<char>> *)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(std::basic_streambuf<char,std::char_traits<char>> *)': cannot convert argument 2 from 'char *' to 'std::basic_streambuf<char,std::char_traits<char>> *'
-              C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,12):
-              Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or parenthesized function-style cast
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(309,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(void *&)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(void *&)': cannot convert argument 2 from 'char *' to 'void *&'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(305,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(long double &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(long double &)': cannot convert argument 2 from 'char *' to 'long double &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(301,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(double &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(double &)': cannot convert argument 2 from 'char *' to 'double &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(297,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(float &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(float &)': cannot convert argument 2 from 'char *' to 'float &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(293,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(unsigned __int64 &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(unsigned __int64 &)': cannot convert argument 2 from 'char *' to 'unsigned __int64 &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(289,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(__int64 &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(__int64 &)': cannot convert argument 2 from 'char *' to '__int64 &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(285,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(unsigned long &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(unsigned long &)': cannot convert argument 2 from 'char *' to 'unsigned long &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(281,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(long &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(long &)': cannot convert argument 2 from 'char *' to 'long &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(277,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(unsigned int &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(unsigned int &)': cannot convert argument 2 from 'char *' to 'unsigned int &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(269,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(int &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(int &)': cannot convert argument 2 from 'char *' to 'int &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(265,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(unsigned short &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(unsigned short &)': cannot convert argument 2 from 'char *' to 'unsigned short &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(233,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(short &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(short &)': cannot convert argument 2 from 'char *' to 'short &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(229,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(bool &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(bool &)': cannot convert argument 2 from 'char *' to 'bool &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(200,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(std::ios_base &(__cdecl *)(std::ios_base &))'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(std::ios_base &(__cdecl *)(std::ios_base &))': cannot convert argument 2 from 'char *' to 'std::ios_base &(__cdecl *)(std::ios_base &)'
-              C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,12):
-              There is no context in which this conversion is possible
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(195,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(std::basic_ios<char,std::char_traits<char>> &(__cdecl *)(std::basic_ios<char,std::char_traits<char>> &))'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(std::basic_ios<char,std::char_traits<char>> &(__cdecl *)(std::basic_ios<char,std::char_traits<char>> &))': cannot convert argument 2 from 'char *' to 'std::basic_ios<char,std::char_traits<char>> &(__cdecl *)(std::basic_ios<char,std::char_traits<char>> &)'
-              C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,12):
-              There is no context in which this conversion is possible
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(190,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(std::basic_istream<char,std::char_traits<char>> &(__cdecl *)(std::basic_istream<char,std::char_traits<char>> &))'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(std::basic_istream<char,std::char_traits<char>> &(__cdecl *)(std::basic_istream<char,std::char_traits<char>> &))': cannot convert argument 2 from 'char *' to 'std::basic_istream<char,std::char_traits<char>> &(__cdecl *)(std::basic_istream<char,std::char_traits<char>> &)'
-              C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,12):
-              There is no context in which this conversion is possible
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(928,9):
-      or       '_Istr &&std::operator >>(_Istr &&,_Ty &&)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          '_Istr &&std::operator >>(_Istr &&,_Ty &&)': could not deduce template argument for '__formal'
-              C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(927,102):
-              '<template-parameter>': you cannot create a pointer to a reference
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(915,31):
-      or       'std::basic_istream<char,_Traits> &std::operator >>(std::basic_istream<char,_Traits> &,unsigned char &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,12):
-          'initializing': cannot convert from 'char *' to 'unsigned char &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(909,31):
-      or       'std::basic_istream<char,_Traits> &std::operator >>(std::basic_istream<char,_Traits> &,signed char &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,12):
-          'initializing': cannot convert from 'char *' to 'signed char &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(886,32):
-      or       'std::basic_istream<_Elem,_Traits> &std::operator >>(std::basic_istream<_Elem,_Traits> &,_Elem &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<_Elem,_Traits> &std::operator >>(std::basic_istream<_Elem,_Traits> &,_Elem &)': template parameter '_Elem' is ambiguous
-              C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-              could be 'char *'
-              C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-              or       'char'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<_Elem,_Traits> &std::operator >>(std::basic_istream<_Elem,_Traits> &,_Elem &)': could not deduce template argument for '_Elem &' from 'char *'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(863,31):
-      or       'std::basic_istream<char,_Traits> &std::operator >>(std::basic_istream<char,_Traits> &,unsigned char (&)[_Size])'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,_Traits> &std::operator >>(std::basic_istream<char,_Traits> &,unsigned char (&)[_Size])': could not deduce template argument for 'unsigned char (&)[_Size]' from 'char *'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(857,31):
-      or       'std::basic_istream<char,_Traits> &std::operator >>(std::basic_istream<char,_Traits> &,signed char (&)[_Size])'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<char,_Traits> &std::operator >>(std::basic_istream<char,_Traits> &,signed char (&)[_Size])': could not deduce template argument for 'signed char (&)[_Size]' from 'char *'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(851,32):
-      or       'std::basic_istream<_Elem,_Traits> &std::operator >>(std::basic_istream<_Elem,_Traits> &,_Elem (&)[_Size])'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<_Elem,_Traits> &std::operator >>(std::basic_istream<_Elem,_Traits> &,_Elem (&)[_Size])': could not deduce template argument for '_Elem (&)[_Size]' from 'char *'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\xstring(3483,32):
-      or       'std::basic_istream<_Elem,_Traits> &std::operator >>(std::basic_istream<_Elem,_Traits> &,std::basic_string<_Elem,_Traits,_Alloc> &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::basic_istream<_Elem,_Traits> &std::operator >>(std::basic_istream<_Elem,_Traits> &,std::basic_string<_Elem,_Traits,_Alloc> &)': could not deduce template argument for 'std::basic_string<_Elem,_Traits,_Alloc> &' from 'char *'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\cstddef(43,27):
-      or       'std::byte std::operator >>(const std::byte,const _IntType) noexcept'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-          'std::byte std::operator >>(const std::byte,const _IntType) noexcept': could not deduce template argument for '__formal'
-              C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\cstddef(36,39):
-              'std::enable_if_t<false,int>' : Failed to specialize alias template
-      C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(27,5):
-      while trying to match the argument list '(std::istream, char *)'
-  
-C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24): error C2679: binary '>>': no operator found which takes a right-hand operand of type 'char *' (or there is no acceptable conversion)
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(313,39):
-      could be 'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(std::basic_streambuf<char,std::char_traits<char>> *)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(std::basic_streambuf<char,std::char_traits<char>> *)': cannot convert argument 2 from 'char *' to 'std::basic_streambuf<char,std::char_traits<char>> *'
-              C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,31):
-              Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or parenthesized function-style cast
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(309,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(void *&)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(void *&)': cannot convert argument 2 from 'char *' to 'void *&'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(305,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(long double &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(long double &)': cannot convert argument 2 from 'char *' to 'long double &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(301,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(double &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(double &)': cannot convert argument 2 from 'char *' to 'double &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(297,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(float &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(float &)': cannot convert argument 2 from 'char *' to 'float &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(293,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(unsigned __int64 &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(unsigned __int64 &)': cannot convert argument 2 from 'char *' to 'unsigned __int64 &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(289,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(__int64 &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(__int64 &)': cannot convert argument 2 from 'char *' to '__int64 &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(285,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(unsigned long &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(unsigned long &)': cannot convert argument 2 from 'char *' to 'unsigned long &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(281,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(long &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(long &)': cannot convert argument 2 from 'char *' to 'long &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(277,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(unsigned int &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(unsigned int &)': cannot convert argument 2 from 'char *' to 'unsigned int &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(269,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(int &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(int &)': cannot convert argument 2 from 'char *' to 'int &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(265,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(unsigned short &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(unsigned short &)': cannot convert argument 2 from 'char *' to 'unsigned short &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(233,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(short &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(short &)': cannot convert argument 2 from 'char *' to 'short &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(229,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(bool &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(bool &)': cannot convert argument 2 from 'char *' to 'bool &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(200,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(std::ios_base &(__cdecl *)(std::ios_base &))'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(std::ios_base &(__cdecl *)(std::ios_base &))': cannot convert argument 2 from 'char *' to 'std::ios_base &(__cdecl *)(std::ios_base &)'
-              C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,31):
-              There is no context in which this conversion is possible
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(195,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(std::basic_ios<char,std::char_traits<char>> &(__cdecl *)(std::basic_ios<char,std::char_traits<char>> &))'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(std::basic_ios<char,std::char_traits<char>> &(__cdecl *)(std::basic_ios<char,std::char_traits<char>> &))': cannot convert argument 2 from 'char *' to 'std::basic_ios<char,std::char_traits<char>> &(__cdecl *)(std::basic_ios<char,std::char_traits<char>> &)'
-              C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,31):
-              There is no context in which this conversion is possible
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(190,39):
-      or       'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(std::basic_istream<char,std::char_traits<char>> &(__cdecl *)(std::basic_istream<char,std::char_traits<char>> &))'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,std::char_traits<char>> &std::basic_istream<char,std::char_traits<char>>::operator >>(std::basic_istream<char,std::char_traits<char>> &(__cdecl *)(std::basic_istream<char,std::char_traits<char>> &))': cannot convert argument 2 from 'char *' to 'std::basic_istream<char,std::char_traits<char>> &(__cdecl *)(std::basic_istream<char,std::char_traits<char>> &)'
-              C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,31):
-              There is no context in which this conversion is possible
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(928,9):
-      or       '_Istr &&std::operator >>(_Istr &&,_Ty &&)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          '_Istr &&std::operator >>(_Istr &&,_Ty &&)': could not deduce template argument for '__formal'
-              C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(927,102):
-              '<template-parameter>': you cannot create a pointer to a reference
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(915,31):
-      or       'std::basic_istream<char,_Traits> &std::operator >>(std::basic_istream<char,_Traits> &,unsigned char &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,31):
-          'initializing': cannot convert from 'char *' to 'unsigned char &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(909,31):
-      or       'std::basic_istream<char,_Traits> &std::operator >>(std::basic_istream<char,_Traits> &,signed char &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,31):
-          'initializing': cannot convert from 'char *' to 'signed char &'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(886,32):
-      or       'std::basic_istream<_Elem,_Traits> &std::operator >>(std::basic_istream<_Elem,_Traits> &,_Elem &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<_Elem,_Traits> &std::operator >>(std::basic_istream<_Elem,_Traits> &,_Elem &)': template parameter '_Elem' is ambiguous
-              C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-              could be 'char *'
-              C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-              or       'char'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<_Elem,_Traits> &std::operator >>(std::basic_istream<_Elem,_Traits> &,_Elem &)': could not deduce template argument for '_Elem &' from 'char *'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(863,31):
-      or       'std::basic_istream<char,_Traits> &std::operator >>(std::basic_istream<char,_Traits> &,unsigned char (&)[_Size])'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,_Traits> &std::operator >>(std::basic_istream<char,_Traits> &,unsigned char (&)[_Size])': could not deduce template argument for 'unsigned char (&)[_Size]' from 'char *'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(857,31):
-      or       'std::basic_istream<char,_Traits> &std::operator >>(std::basic_istream<char,_Traits> &,signed char (&)[_Size])'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<char,_Traits> &std::operator >>(std::basic_istream<char,_Traits> &,signed char (&)[_Size])': could not deduce template argument for 'signed char (&)[_Size]' from 'char *'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\istream(851,32):
-      or       'std::basic_istream<_Elem,_Traits> &std::operator >>(std::basic_istream<_Elem,_Traits> &,_Elem (&)[_Size])'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<_Elem,_Traits> &std::operator >>(std::basic_istream<_Elem,_Traits> &,_Elem (&)[_Size])': could not deduce template argument for '_Elem (&)[_Size]' from 'char *'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\xstring(3483,32):
-      or       'std::basic_istream<_Elem,_Traits> &std::operator >>(std::basic_istream<_Elem,_Traits> &,std::basic_string<_Elem,_Traits,_Alloc> &)'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::basic_istream<_Elem,_Traits> &std::operator >>(std::basic_istream<_Elem,_Traits> &,std::basic_string<_Elem,_Traits,_Alloc> &)': could not deduce template argument for 'std::basic_string<_Elem,_Traits,_Alloc> &' from 'char *'
-      C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\cstddef(43,27):
-      or       'std::byte std::operator >>(const std::byte,const _IntType) noexcept'
-          C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-          'std::byte std::operator >>(const std::byte,const _IntType) noexcept': could not deduce template argument for '__formal'
-              C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\cstddef(36,39):
-              'std::enable_if_t<false,int>' : Failed to specialize alias template
-      C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(32,24):
-      while trying to match the argument list '(std::istream, char *)'
-  
-C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(82,34): error C2039: 'getUnitCount': is not a member of 'BaseFacility'
-      C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\BaseFacility.h(7,7):
-      see declaration of 'BaseFacility'
-  
-C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(112,34): error C2039: 'addJeep': is not a member of 'MilitarySystem'
-      C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\MilitarySystem.h(16,7):
-      see declaration of 'MilitarySystem'
-  
-C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(116,34): error C2039: 'addTruck': is not a member of 'MilitarySystem'
-      C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\MilitarySystem.h(16,7):
-      see declaration of 'MilitarySystem'
-  
-C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(122,34): error C2039: 'addArmoredTransport': is not a member of 'MilitarySystem'
-      C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\MilitarySystem.h(16,7):
-      see declaration of 'MilitarySystem'
-  
-C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(145,20): error C2039: 'printAllWarehouses': is not a member of 'MilitarySystem'
-      C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\MilitarySystem.h(16,7):
-      see declaration of 'MilitarySystem'
-  
-C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(159,25): error C2039: 'warehouseExists': is not a member of 'MilitarySystem'
-      C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\MilitarySystem.h(16,7):
-      see declaration of 'MilitarySystem'
-  
-C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(211,34): error C2039: 'getUnitCount': is not a member of 'BaseFacility'
-      C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\BaseFacility.h(7,7):
-      see declaration of 'BaseFacility'
-  
-C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(229,24): error C2039: 'printAllVehicles': is not a member of 'MilitarySystem'
-      C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\MilitarySystem.h(16,7):
-      see declaration of 'MilitarySystem'
-  
-C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(249,24): error C2039: 'printAllWarehouses': is not a member of 'MilitarySystem'
-      C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\MilitarySystem.h(16,7):
-      see declaration of 'MilitarySystem'
-  
-C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\main.cpp(259,29): error C2039: 'warehouseExists': is not a member of 'MilitarySystem'
-      C:\Users\Oaley\Downloads\New folder\MilitarySystem\src\MilitarySystem.h(16,7):
-      see declaration of 'MilitarySystem'
-  
+main.obj : error LNK2019: unresolved external symbol "public: int __cdecl BaseFacility::getVehicleCount(void)const " (?getVehicleCount@BaseFacility@@QEBAHXZ) referenced in function "void __cdecl createLogisticsMission(class MilitarySystem &)" (?createLogisticsMission@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: int __cdecl BaseFacility::getWarehouseCount(void)const " (?getWarehouseCount@BaseFacility@@QEBAHXZ) referenced in function "void __cdecl addEquipment(class MilitarySystem &)" (?addEquipment@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: __cdecl Date::Date(int,int,int)" (??0Date@@QEAA@HHH@Z) referenced in function "void __cdecl addOfficer(class MilitarySystem &)" (?addOfficer@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl Mission::setStatus(enum Mission::eMissionStatus)" (?setStatus@Mission@@QEAA_NW4eMissionStatus@1@@Z) referenced in function "void __cdecl updateMissionStatus(class MilitarySystem &)" (?updateMissionStatus@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: void __cdecl Report::print(void)const " (?print@Report@@QEBAXXZ) referenced in function main
+main.obj : error LNK2019: unresolved external symbol "public: __cdecl MilitarySystem::MilitarySystem(void)" (??0MilitarySystem@@QEAA@XZ) referenced in function main
+main.obj : error LNK2019: unresolved external symbol "public: __cdecl MilitarySystem::~MilitarySystem(void)" (??1MilitarySystem@@QEAA@XZ) referenced in function main
+main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addSoldier(char const *,class Date const &,char const *,enum Soldier::eRank)" (?addSoldier@MilitarySystem@@QEAA_NPEBDAEBVDate@@0W4eRank@Soldier@@@Z) referenced in function "void __cdecl addSoldier(class MilitarySystem &)" (?addSoldier@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addOfficer(char const *,class Date const &,char const *,enum Soldier::eRank)" (?addOfficer@MilitarySystem@@QEAA_NPEBDAEBVDate@@0W4eRank@Soldier@@@Z) referenced in function "void __cdecl addOfficer(class MilitarySystem &)" (?addOfficer@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addUnit(char const *)" (?addUnit@MilitarySystem@@QEAA_NPEBD@Z) referenced in function "void __cdecl createUnit(class MilitarySystem &)" (?createUnit@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::transferSoldier(int,int)" (?transferSoldier@MilitarySystem@@QEAA_NHH@Z) referenced in function "void __cdecl transferSoldier(class MilitarySystem &)" (?transferSoldier@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addWarehouse(char const *)" (?addWarehouse@MilitarySystem@@QEAA_NPEBD@Z) referenced in function "void __cdecl addWarehouse(class MilitarySystem &)" (?addWarehouse@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addEquipment(char const *,char const *,char const *,int,enum Equipment::eEquipmentStatus)" (?addEquipment@MilitarySystem@@QEAA_NPEBD00HW4eEquipmentStatus@Equipment@@@Z) referenced in function "void __cdecl addEquipment(class MilitarySystem &)" (?addEquipment@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: class Vehicle * __cdecl MilitarySystem::findVehicle(char const *)const " (?findVehicle@MilitarySystem@@QEBAPEAVVehicle@@PEBD@Z) referenced in function "void __cdecl markVehicleMaintenance(class MilitarySystem &)" (?markVehicleMaintenance@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addJeep(char const *,int)" (?addJeep@MilitarySystem@@QEAA_NPEBDH@Z) referenced in function "void __cdecl addVehicle(class MilitarySystem &)" (?addVehicle@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addTruck(char const *,double)" (?addTruck@MilitarySystem@@QEAA_NPEBDN@Z) referenced in function "void __cdecl addVehicle(class MilitarySystem &)" (?addVehicle@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addArmoredTransport(char const *,int,double)" (?addArmoredTransport@MilitarySystem@@QEAA_NPEBDHN@Z) referenced in function "void __cdecl addVehicle(class MilitarySystem &)" (?addVehicle@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: void __cdecl MilitarySystem::printAllVehicles(void)const " (?printAllVehicles@MilitarySystem@@QEBAXXZ) referenced in function "void __cdecl createLogisticsMission(class MilitarySystem &)" (?createLogisticsMission@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: void __cdecl MilitarySystem::printAllWarehouses(void)const " (?printAllWarehouses@MilitarySystem@@QEBAXXZ) referenced in function "void __cdecl addEquipment(class MilitarySystem &)" (?addEquipment@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::warehouseExists(char const *)const " (?warehouseExists@MilitarySystem@@QEBA_NPEBD@Z) referenced in function "void __cdecl addEquipment(class MilitarySystem &)" (?addEquipment@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addTrainingMission(char const *,int,enum TrainingMission::eTrainingType,enum TrainingMission::eDifficultyLevel)" (?addTrainingMission@MilitarySystem@@QEAA_NPEBDHW4eTrainingType@TrainingMission@@W4eDifficultyLevel@3@@Z) referenced in function "void __cdecl createTrainingMission(class MilitarySystem &)" (?createTrainingMission@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: int __cdecl MilitarySystem::addLogisticsMission(char const *,int)" (?addLogisticsMission@MilitarySystem@@QEAAHPEBDH@Z) referenced in function "void __cdecl createLogisticsMission(class MilitarySystem &)" (?createLogisticsMission@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: class Mission * __cdecl MilitarySystem::findMission(int)const " (?findMission@MilitarySystem@@QEBAPEAVMission@@H@Z) referenced in function "void __cdecl updateMissionStatus(class MilitarySystem &)" (?updateMissionStatus@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::setMissionVehicle(int,char const *)" (?setMissionVehicle@MilitarySystem@@QEAA_NHPEBD@Z) referenced in function "void __cdecl createLogisticsMission(class MilitarySystem &)" (?createLogisticsMission@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addMissionEquipment(int,char const *,char const *)" (?addMissionEquipment@MilitarySystem@@QEAA_NHPEBD0@Z) referenced in function "void __cdecl createLogisticsMission(class MilitarySystem &)" (?createLogisticsMission@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: class BaseFacility & __cdecl MilitarySystem::getBase(void)" (?getBase@MilitarySystem@@QEAAAEAVBaseFacility@@XZ) referenced in function "void __cdecl addEquipment(class MilitarySystem &)" (?addEquipment@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: void __cdecl MilitarySystem::printAllUnits(void)const " (?printAllUnits@MilitarySystem@@QEBAXXZ) referenced in function "void __cdecl createLogisticsMission(class MilitarySystem &)" (?createLogisticsMission@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: void __cdecl MilitarySystem::printAllMissions(void)const " (?printAllMissions@MilitarySystem@@QEBAXXZ) referenced in function "void __cdecl updateMissionStatus(class MilitarySystem &)" (?updateMissionStatus@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: int __cdecl MilitarySystem::getUnitsCount(void)const " (?getUnitsCount@MilitarySystem@@QEBAHXZ) referenced in function "void __cdecl createLogisticsMission(class MilitarySystem &)" (?createLogisticsMission@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: int __cdecl MilitarySystem::getMissionsCount(void)const " (?getMissionsCount@MilitarySystem@@QEBAHXZ) referenced in function "void __cdecl updateMissionStatus(class MilitarySystem &)" (?updateMissionStatus@@YAXAEAVMilitarySystem@@@Z)
+main.obj : error LNK2019: unresolved external symbol "public: class Report __cdecl MilitarySystem::generateReport(void)const " (?generateReport@MilitarySystem@@QEBA?AVReport@@XZ) referenced in function main
+main.obj : error LNK2019: unresolved external symbol "public: void __cdecl MilitarySystem::printAllData(void)const " (?printAllData@MilitarySystem@@QEBAXXZ) referenced in function main
+main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl Vehicle::sendToMaintenance(void)" (?sendToMaintenance@Vehicle@@QEAA_NXZ) referenced in function "void __cdecl markVehicleMaintenance(class MilitarySystem &)" (?markVehicleMaintenance@@YAXAEAVMilitarySystem@@@Z)
+D:\Afeka\Year_4\C++\MilitarySystem\x64\Debug\MilitarySystem.exe : fatal error LNK1120: 33 unresolved externals

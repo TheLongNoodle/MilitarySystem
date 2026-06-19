@@ -3,6 +3,7 @@
 
 #include "Mission.h"
 class Equipment;
+class Unit;
 
 class Vehicle;
 
@@ -15,7 +16,7 @@ private:
     int requiredCapacity;
 
 public:
-    LogisticsMission(const char* missionName, Unit* assignedUnit);
+    LogisticsMission(const char* missionName, Unit& assignedUnit);
     ~LogisticsMission();
 
     LogisticsMission(const LogisticsMission& other) = delete;

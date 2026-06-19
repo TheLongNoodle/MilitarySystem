@@ -62,6 +62,18 @@ public:
     Vehicle* findVehicle(const char* vehicleNumber) const;
     bool setVehicleDriver(const char* vehicleNumber, int personalNumber);
 
+    // ---- Delegation surface kept on MilitarySystem so main does not need
+    // ---- to know which sub-object actually owns vehicles or warehouses.
+    // ---- Each forwards to the corresponding method on BaseFacility.
+    bool addJeep(const char* vehicleNumber, int maxPassengers);
+    bool addTruck(const char* vehicleNumber, double maxWeightKG);
+    bool addArmoredTransport(const char* vehicleNumber,
+                             int maxPassengers,
+                             double maxWeightKG);
+    void printAllVehicles() const;
+    void printAllWarehouses() const;
+    bool warehouseExists(const char* name) const;
+
     bool addTrainingMission(const char* missionName,
                             int unitId,
                             TrainingMission::eTrainingType trainingType,
@@ -78,6 +90,7 @@ public:
 
     void printAllUnits() const;
     void printAllMissions() const;
+    int  getUnitsCount() const;
     int  getMissionsCount() const;
     Report generateReport() const;
     void   printAllData() const;

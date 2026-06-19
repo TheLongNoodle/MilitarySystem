@@ -3,6 +3,8 @@
 
 #include "Mission.h"
 
+class Unit;
+
 class TrainingMission : public Mission {
 public:
     enum class eTrainingType {
@@ -24,7 +26,7 @@ private:
 
 public:
     TrainingMission(const char* missionName,
-                    Unit* assignedUnit,
+                    Unit& assignedUnit,
                     eTrainingType trainingType,
                     eDifficultyLevel difficultyLevel);
 

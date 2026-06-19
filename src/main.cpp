@@ -11,18 +11,20 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <stdexcept>
+#include <limits>
 
 using namespace std;
 
 const int LINE_LEN = 256;
 
 void readPersonInput(const char* namePrompt,
-                     char* name,
-                     char* role,
-                     int& day,
-                     int& month,
-                     int& year,
-                     int& rank) {
+    char(&name)[LINE_LEN],
+    char(&role)[LINE_LEN],
+    int& day,
+    int& month,
+    int& year,
+    int& rank) {
     cout << namePrompt;
     cin >> name;
     cout << "Enter birth date:" << endl;
@@ -42,9 +44,10 @@ void addSoldier(MilitarySystem& militarySystem) {
     readPersonInput("Soldier name: ", name, role, day, month, year, rank);
 
     if (militarySystem.addSoldier(name, Date(day, month, year), role,
-                                  (Soldier::eRank)rank)) {
+        (Soldier::eRank)rank)) {
         cout << "Soldier added." << endl;
-    } else {
+    }
+    else {
         cout << "Failed to add soldier." << endl;
     }
 }
@@ -57,9 +60,10 @@ void addOfficer(MilitarySystem& militarySystem) {
     readPersonInput("Officer name: ", name, role, day, month, year, rank);
 
     if (militarySystem.addOfficer(name, Date(day, month, year), role,
-                                  (Soldier::eRank)rank)) {
+        (Soldier::eRank)rank)) {
         cout << "Officer added." << endl;
-    } else {
+    }
+    else {
         cout << "Failed to add officer." << endl;
     }
 }
@@ -71,7 +75,8 @@ void createUnit(MilitarySystem& militarySystem) {
 
     if (militarySystem.addUnit(unitName)) {
         cout << "Unit created." << endl;
-    } else {
+    }
+    else {
         cout << "Failed to create unit." << endl;
     }
 }
@@ -79,7 +84,7 @@ void createUnit(MilitarySystem& militarySystem) {
 void transferSoldier(MilitarySystem& militarySystem) {
     militarySystem.printAllUnits();
 
-    if (militarySystem.getBase().getUnitCount() == 0) {
+    if (militarySystem.getUnitsCount() == 0) {
         return;
     }
 
@@ -91,7 +96,8 @@ void transferSoldier(MilitarySystem& militarySystem) {
 
     if (militarySystem.transferSoldier(personalNumber, newUnitId)) {
         cout << "Soldier assigned to unit." << endl;
-    } else {
+    }
+    else {
         cout << "Failed to assign soldier to unit." << endl;
     }
 }
@@ -110,17 +116,20 @@ void addVehicle(MilitarySystem& militarySystem) {
         int maxPassengers;
         cout << "Max passengers: "; cin >> maxPassengers;
         success = militarySystem.addJeep(vehicleNumber, maxPassengers);
-    } else if (vehicleType == 2) {
+    }
+    else if (vehicleType == 2) {
         double maxWeightKG;
         cout << "Max weight (kg): "; cin >> maxWeightKG;
         success = militarySystem.addTruck(vehicleNumber, maxWeightKG);
-    } else if (vehicleType == 3) {
+    }
+    else if (vehicleType == 3) {
         int maxPassengers;
         double maxWeightKG;
         cout << "Max passengers: "; cin >> maxPassengers;
         cout << "Max weight (kg): "; cin >> maxWeightKG;
         success = militarySystem.addArmoredTransport(vehicleNumber, maxPassengers, maxWeightKG);
-    } else {
+    }
+    else {
         cout << "Invalid vehicle type." << endl;
         return;
     }
@@ -131,12 +140,13 @@ void addVehicle(MilitarySystem& militarySystem) {
 
 void addWarehouse(MilitarySystem& militarySystem) {
     char warehouseName[LINE_LEN];
-    cout << "Warehouse name: "; 
+    cout << "Warehouse name: ";
     cin >> warehouseName;
 
     if (militarySystem.addWarehouse(warehouseName)) {
         cout << "Warehouse added." << endl;
-    } else {
+    }
+    else {
         cout << "Failed to add warehouse." << endl;
     }
 }
@@ -171,9 +181,10 @@ void addEquipment(MilitarySystem& militarySystem) {
     cin >> equipmentStatus;
 
     if (militarySystem.addEquipment(warehouseName, equipmentName, serialNumber, quantity,
-                                    (Equipment::eEquipmentStatus)equipmentStatus)) {
+        (Equipment::eEquipmentStatus)equipmentStatus)) {
         cout << "Equipment added." << endl;
-    } else {
+    }
+    else {
         cout << "Failed to add equipment." << endl;
     }
 }
@@ -182,20 +193,21 @@ void createTrainingMission(MilitarySystem& militarySystem) {
     char name[LINE_LEN];
     int unitId, trainingType, difficultyLevel;
 
-    cout << "Mission name: ";   
+    cout << "Mission name: ";
     cin >> name;
-    cout << "Assigned unit ID: "; 
+    cout << "Assigned unit ID: ";
     cin >> unitId;
-    cout << "Training type (0=FITNESS 1=DRIVING 2=TECHNICAL 3=COMMAND): "; 
+    cout << "Training type (0=FITNESS 1=DRIVING 2=TECHNICAL 3=COMMAND): ";
     cin >> trainingType;
-    cout << "Difficulty (0=EASY 1=MEDIUM 2=HARD): ";                      
+    cout << "Difficulty (0=EASY 1=MEDIUM 2=HARD): ";
     cin >> difficultyLevel;
 
     if (militarySystem.addTrainingMission(name, unitId,
-                                          (TrainingMission::eTrainingType)trainingType,
-                                          (TrainingMission::eDifficultyLevel)difficultyLevel)) {
+        (TrainingMission::eTrainingType)trainingType,
+        (TrainingMission::eDifficultyLevel)difficultyLevel)) {
         cout << "Training mission created." << endl;
-    } else {
+    }
+    else {
         cout << "Failed to create training mission." << endl;
     }
 }
@@ -208,7 +220,7 @@ void createLogisticsMission(MilitarySystem& militarySystem) {
     cin >> name;
 
     militarySystem.printAllUnits();
-    if (militarySystem.getBase().getUnitCount() == 0) {
+    if (militarySystem.getUnitsCount() == 0) {
         return;
     }
 
@@ -229,13 +241,15 @@ void createLogisticsMission(MilitarySystem& militarySystem) {
         militarySystem.printAllVehicles();
         if (militarySystem.getBase().getVehicleCount() == 0) {
             cout << "No vehicles in the base." << endl;
-        } else {
+        }
+        else {
             char vehicleNumber[LINE_LEN];
             cout << "Vehicle number: ";
             cin >> vehicleNumber;
             if (militarySystem.setMissionVehicle(missionId, vehicleNumber)) {
                 cout << "Vehicle assigned." << endl;
-            } else {
+            }
+            else {
                 cout << "Failed to assign vehicle." << endl;
             }
         }
@@ -265,7 +279,8 @@ void createLogisticsMission(MilitarySystem& militarySystem) {
         cin >> equipmentName;
         if (militarySystem.addMissionEquipment(missionId, warehouseName, equipmentName)) {
             cout << "Equipment added to mission." << endl;
-        } else {
+        }
+        else {
             cout << "Failed to add equipment." << endl;
         }
     }
@@ -279,9 +294,9 @@ void updateMissionStatus(MilitarySystem& militarySystem) {
         return;
     }
 
-    cout << "Mission ID: ";                                       
+    cout << "Mission ID: ";
     cin >> missionId;
-    cout << "Status (0=NOT_STARTED 1=IN_PROGRESS 2=COMPLETED): "; 
+    cout << "Status (0=NOT_STARTED 1=IN_PROGRESS 2=COMPLETED): ";
     cin >> missionStatus;
 
     Mission* mission = militarySystem.findMission(missionId);
@@ -291,14 +306,15 @@ void updateMissionStatus(MilitarySystem& militarySystem) {
     }
     if (mission->setStatus((Mission::eMissionStatus)missionStatus)) {
         cout << "Status updated." << endl;
-    } else {
+    }
+    else {
         cout << "Status update rejected." << endl;
     }
 }
 
 void markVehicleMaintenance(MilitarySystem& militarySystem) {
     char vehicleNumber[LINE_LEN];
-    cout << "Vehicle number: "; 
+    cout << "Vehicle number: ";
     cin >> vehicleNumber;
 
     Vehicle* vehicle = militarySystem.findVehicle(vehicleNumber);
@@ -308,7 +324,8 @@ void markVehicleMaintenance(MilitarySystem& militarySystem) {
     }
     if (vehicle->sendToMaintenance()) {
         cout << "Vehicle marked for maintenance." << endl;
-    } else {
+    }
+    else {
         cout << "Failed." << endl;
     }
 }
@@ -316,20 +333,20 @@ void markVehicleMaintenance(MilitarySystem& militarySystem) {
 void printMenu() {
     cout << endl;
     cout << "=== Military Base Management System ===" << endl;
-    cout << " 1. Add soldier"                                              << endl;
-    cout << " 2. Add officer"                                              << endl;
-    cout << " 3. Create unit"                                              << endl;
-    cout << " 4. Assign / transfer soldier to unit"                       << endl;
-    cout << " 5. Add vehicle (Jeep / Truck / ArmoredTransport)"            << endl;
-    cout << " 6. Add warehouse"                                            << endl;
-    cout << " 7. Add equipment to warehouse"                               << endl;
-    cout << " 8. Create training mission"                                  << endl;
-    cout << " 9. Create logistics mission"                                 << endl;
-    cout << "10. Update mission status"                                    << endl;
-    cout << "11. Mark vehicle for maintenance"                             << endl;
-    cout << "12. Print all data"                                           << endl;
-    cout << "13. Generate and print report"                                << endl;
-    cout << " 0. Exit"                                                     << endl;
+    cout << " 1. Add soldier" << endl;
+    cout << " 2. Add officer" << endl;
+    cout << " 3. Create unit" << endl;
+    cout << " 4. Assign / transfer soldier to unit" << endl;
+    cout << " 5. Add vehicle (Jeep / Truck / ArmoredTransport)" << endl;
+    cout << " 6. Add warehouse" << endl;
+    cout << " 7. Add equipment to warehouse" << endl;
+    cout << " 8. Create training mission" << endl;
+    cout << " 9. Create logistics mission" << endl;
+    cout << "10. Update mission status" << endl;
+    cout << "11. Mark vehicle for maintenance" << endl;
+    cout << "12. Print all data" << endl;
+    cout << "13. Generate and print report" << endl;
+    cout << " 0. Exit" << endl;
 }
 
 int main() {
@@ -345,7 +362,13 @@ int main() {
         cout << "Choice: ";
         cin >> choice;
 
-        switch (choice) {
+        // Top-level catch: the assignment requires that no exception ever
+        // escapes uncaught and crashes the program. Constructors validate via
+        // std::invalid_argument; Warehouse::operator[] throws std::out_of_range
+        // on bad index. Both derive from std::exception. We also clear cin's
+        // fail-state in case a bad numeric read corrupted the stream.
+        try {
+            switch (choice) {
             case 1:  addSoldier(militarySystem);                       break;
             case 2:  addOfficer(militarySystem);                       break;
             case 3:  createUnit(militarySystem);                       break;
@@ -361,6 +384,14 @@ int main() {
             case 13: militarySystem.generateReport().print();          break;
             case 0:  cout << "Goodbye." << endl;                       break;
             default: cout << "Invalid choice." << endl;
+            }
+        }
+        catch (const std::exception& e) {
+            cout << "Error: " << e.what() << endl;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            }
         }
     } while (choice != 0);
 

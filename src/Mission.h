@@ -17,10 +17,10 @@ private:
     char* missionName;
     int   missionId;
     eMissionStatus status;
-    Unit* assignedUnit;
+    Unit& assignedUnit;   // reference member: bound at construction, non-rebindable
 
 public:
-    Mission(const char* missionName, Unit* assignedUnit);
+    Mission(const char* missionName, Unit& assignedUnit);
     virtual ~Mission();
 
     Mission(const Mission& other) = delete;
@@ -29,7 +29,7 @@ public:
     const char*    getMissionName() const;
     int            getMissionId() const;
     eMissionStatus getStatus() const;
-    Unit*          getAssignedUnit() const;
+    const Unit&    getAssignedUnit() const;
 
     bool setMissionName(const char* missionName);
     bool setStatus(eMissionStatus newStatus);

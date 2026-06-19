@@ -31,6 +31,10 @@ public:
     bool addSoldier(Soldier* soldier);
     bool removeSoldier(const Soldier* soldier);
     void printSoldiers() const;
+
+    // Idiomatic equivalent of addSoldier: u += soldierPtr;
+    // Returns *this for chaining: (u += s1) += s2;
+    Unit& operator+=(Soldier* soldier);
 };
 
 #endif // UNIT_H

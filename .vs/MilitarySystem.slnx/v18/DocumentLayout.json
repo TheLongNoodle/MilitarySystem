@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Oaley\\Downloads\\New folder\\MilitarySystem\\",
+  "WorkspaceRootPath": "D:\\Afeka\\Year_4\\C\u002B\u002B\\MilitarySystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0AE4699F-4DE6-48FB-87D9-93A5833C0B00}|MilitarySystem.vcxproj|C:\\Users\\Oaley\\Downloads\\New folder\\MilitarySystem\\src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{0AE4699F-4DE6-48FB-87D9-93A5833C0B00}|MilitarySystem.vcxproj|D:\\Afeka\\Year_4\\C\u002B\u002B\\MilitarySystem\\src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{0AE4699F-4DE6-48FB-87D9-93A5833C0B00}|MilitarySystem.vcxproj|solutionrelative:src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -14,20 +14,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "main.cpp",
-              "DocumentMoniker": "C:\\Users\\Oaley\\Downloads\\New folder\\MilitarySystem\\src\\main.cpp",
+              "DocumentMoniker": "D:\\Afeka\\Year_4\\C\u002B\u002B\\MilitarySystem\\src\\main.cpp",
               "RelativeDocumentMoniker": "src\\main.cpp",
-              "ToolTip": "C:\\Users\\Oaley\\Downloads\\New folder\\MilitarySystem\\src\\main.cpp",
+              "ToolTip": "D:\\Afeka\\Year_4\\C\u002B\u002B\\MilitarySystem\\src\\main.cpp",
               "RelativeToolTip": "src\\main.cpp",
-              "ViewState": "AgIAAIQAAAAAAAAAAAAAAJ8AAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABAAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-06-19T12:20:16.177Z",
               "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 171,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }

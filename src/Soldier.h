@@ -2,6 +2,7 @@
 #define SOLDIER_H
 
 #include "Date.h"
+#include <iosfwd>
 
 class Unit;
 
@@ -55,5 +56,15 @@ public:
 
     virtual void print() const;
 };
+
+// ---- Non-member operators on Soldier ------------------------------------
+// Soldier (and through inheritance, Officer) has a unique identity given by
+// its personalNumber. operator== reflects that identity-based equality:
+// two distinct Soldier objects are never "equal", and the same Soldier
+// looked up twice is. operator<< is the streamable equivalent of print()
+// and is virtual-dispatched through it, so it polymorphically prints an
+// Officer's commanded-soldiers block when called on an Officer reference.
+bool operator==(const Soldier& a, const Soldier& b);
+std::ostream& operator<<(std::ostream& os, const Soldier& s);
 
 #endif // SOLDIER_H

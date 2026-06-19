@@ -27,6 +27,13 @@ public:
     bool       addEquipment(Equipment* equipment);
     Equipment* searchEquipment(const char* name) const;
     void       printEquipment() const;
+
+    // Indexed access by position. Mirrors getEquipment(int) but with the
+    // [] idiom. Returns a const reference; throws std::out_of_range when
+    // index is outside [0, count). The reference form makes a successful
+    // access non-nullable, which is preferable for callers that already
+    // checked the size via getEquipmentCount().
+    const Equipment& operator[](int index) const;
 };
 
 #endif // WAREHOUSE_H
