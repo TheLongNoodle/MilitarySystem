@@ -63,9 +63,108 @@
     <ClInclude Include="src\LogisticsMission.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\ArmoredTransport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\BaseFacility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Date.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Equipment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Jeep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\LogisticsMission.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\MilitarySystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Mission.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Officer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Report.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Soldier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\TrainingMission.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Truck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Unit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Vehicle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Warehouse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp">
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\ArmoredTransport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\BaseFacility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Date.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Equipment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Jeep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\LogisticsMission.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\MilitarySystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Mission.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Officer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Report.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Soldier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\TrainingMission.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Truck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Unit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Vehicle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Warehouse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

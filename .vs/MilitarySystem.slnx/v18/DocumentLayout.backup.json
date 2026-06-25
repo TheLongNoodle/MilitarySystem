@@ -3,8 +3,10 @@
   "WorkspaceRootPath": "D:\\Afeka\\Year_4\\C\u002B\u002B\\MilitarySystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0AE4699F-4DE6-48FB-87D9-93A5833C0B00}|MilitarySystem.vcxproj|D:\\Afeka\\Year_4\\C\u002B\u002B\\MilitarySystem\\src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{0AE4699F-4DE6-48FB-87D9-93A5833C0B00}|MilitarySystem.vcxproj|solutionrelative:src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{0AE4699F-4DE6-48FB-87D9-93A5833C0B00}|MilitarySystem.vcxproj|C:\\Users\\glate\\Desktop\\V2\\MilitarySystem_part2\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0AE4699F-4DE6-48FB-87D9-93A5833C0B00}|MilitarySystem.vcxproj|C:\\Users\\glate\\Desktop\\V2\\MilitarySystem_part2\\Utils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -24,13 +26,22 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "main.cpp",
-              "DocumentMoniker": "D:\\Afeka\\Year_4\\C\u002B\u002B\\MilitarySystem\\src\\main.cpp",
-              "RelativeDocumentMoniker": "src\\main.cpp",
-              "ToolTip": "D:\\Afeka\\Year_4\\C\u002B\u002B\\MilitarySystem\\src\\main.cpp",
-              "RelativeToolTip": "src\\main.cpp",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABcAAAAfAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\glate\\Desktop\\V2\\MilitarySystem_part2\\main.cpp",
+              "ToolTip": "C:\\Users\\glate\\Desktop\\V2\\MilitarySystem_part2\\main.cpp",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABoAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-06-19T12:20:16.177Z",
+              "WhenOpened": "2026-06-25T11:05:22.617Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Utils.h",
+              "DocumentMoniker": "C:\\Users\\glate\\Desktop\\V2\\MilitarySystem_part2\\Utils.h",
+              "ToolTip": "C:\\Users\\glate\\Desktop\\V2\\MilitarySystem_part2\\Utils.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-06-25T11:01:30.326Z",
               "EditorCaption": ""
             }
           ]

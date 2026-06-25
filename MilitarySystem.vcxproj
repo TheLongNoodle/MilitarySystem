@@ -19,6 +19,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\ArmoredTransport.h" />
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\BaseFacility.h" />
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Date.h" />
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Equipment.h" />
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Jeep.h" />
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\LogisticsMission.h" />
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\MilitarySystem.h" />
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Mission.h" />
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Officer.h" />
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Report.h" />
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Soldier.h" />
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\TrainingMission.h" />
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Truck.h" />
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Unit.h" />
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Utils.h" />
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Vehicle.h" />
+    <ClInclude Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Warehouse.h" />
     <ClInclude Include="src\ArmoredTransport.h" />
     <ClInclude Include="src\BaseFacility.h" />
     <ClInclude Include="src\Date.h" />
@@ -37,7 +54,23 @@
     <ClInclude Include="src\Warehouse.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\ArmoredTransport.cpp" />
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\BaseFacility.cpp" />
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Date.cpp" />
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Equipment.cpp" />
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Jeep.cpp" />
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\LogisticsMission.cpp" />
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\main.cpp" />
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\MilitarySystem.cpp" />
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Mission.cpp" />
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Officer.cpp" />
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Report.cpp" />
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Soldier.cpp" />
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\TrainingMission.cpp" />
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Truck.cpp" />
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Unit.cpp" />
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Vehicle.cpp" />
+    <ClCompile Include="C:\Users\glate\Desktop\V2\MilitarySystem_part2\Warehouse.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
