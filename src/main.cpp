@@ -9,14 +9,59 @@
 #include "Report.h"
 
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
 #include <stdexcept>
 #include <limits>
 
 using namespace std;
 
 const int LINE_LEN = 256;
+
+// Extraction failure (e.g. letters where a number is expected) leaves cin in
+// a fail state that silently breaks every read after it, so all numeric input
+// goes through these helpers: they recover the stream and re-prompt instead.
+void discardBadInput()
+{
+    cin.clear();
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
+int readInt(const char* prompt)
+{
+    int value;
+    cout << prompt;
+    while (!(cin >> value))
+    {
+        discardBadInput();
+        cout << "Invalid input, please enter a number." << endl;
+        cout << prompt;
+    }
+    return value;
+}
+
+int readIntInRange(const char* prompt, int minValue, int maxValue)
+{
+    int value = readInt(prompt);
+    while (value < minValue || value > maxValue)
+    {
+        cout << "Value must be between " << minValue << " and "
+             << maxValue << "." << endl;
+        value = readInt(prompt);
+    }
+    return value;
+}
+
+double readDouble(const char* prompt)
+{
+    double value;
+    cout << prompt;
+    while (!(cin >> value))
+    {
+        discardBadInput();
+        cout << "Invalid input, please enter a number." << endl;
+        cout << prompt;
+    }
+    return value;
+}
 
 void readPersonInput(const char* namePrompt, char (&name)[LINE_LEN],
                      char (&role)[LINE_LEN], int& day, int& month,
@@ -25,12 +70,13 @@ void readPersonInput(const char* namePrompt, char (&name)[LINE_LEN],
     cout << namePrompt;
     cin >> name;
     cout << "Enter birth date:" << endl;
-    cout << "Day: ";   cin >> day;
-    cout << "Month: "; cin >> month;
-    cout << "Year: ";  cin >> year;
+    day   = readInt("Day: ");
+    month = readInt("Month: ");
+    year  = readInt("Year: ");
     cout << "Role: ";  cin >> role;
-    cout << "Rank (0=PRIVATE 1=CORPORAL 2=SERGEANT 3=LIEUTENANT 4=CAPTAIN 5=MAJOR): ";
-    cin >> rank;
+    rank = readIntInRange(
+        "Rank (0=PRIVATE 1=CORPORAL 2=SERGEANT 3=LIEUTENANT 4=CAPTAIN 5=MAJOR): ",
+        0, 5);
 }
 
 void addSoldier(MilitarySystem& militarySystem)
@@ -96,11 +142,8 @@ void transferSoldier(MilitarySystem& militarySystem)
         return;
     }
 
-    int personalNumber, newUnitId;
-    cout << "Soldier personal number: ";
-    cin >> personalNumber;
-    cout << "Unit ID: ";
-    cin >> newUnitId;
+    int personalNumber = readInt("Soldier personal number: ");
+    int newUnitId = readInt("Unit ID: ");
 
     if (militarySystem.transferSoldier(personalNumber, newUnitId))
     {
@@ -114,9 +157,7 @@ void transferSoldier(MilitarySystem& militarySystem)
 
 void addVehicle(MilitarySystem& militarySystem)
 {
-    int vehicleType;
-    cout << "Vehicle type (1=Jeep 2=Truck 3=ArmoredTransport): ";
-    cin >> vehicleType;
+    int vehicleType = readIntInRange("Vehicle type (1=Jeep 2=Truck 3=ArmoredTransport): ", 1, 3);
 
     char vehicleNumber[LINE_LEN];
     cout << "Vehicle number: ";
@@ -125,28 +166,19 @@ void addVehicle(MilitarySystem& militarySystem)
     bool success = false;
     if (vehicleType == 1)
     {
-        int maxPassengers;
-        cout << "Max passengers: "; cin >> maxPassengers;
+        int maxPassengers = readInt("Max passengers: ");
         success = militarySystem.addJeep(vehicleNumber, maxPassengers);
     }
     else if (vehicleType == 2)
     {
-        double maxWeightKG;
-        cout << "Max weight (kg): "; cin >> maxWeightKG;
+        double maxWeightKG = readDouble("Max weight (kg): ");
         success = militarySystem.addTruck(vehicleNumber, maxWeightKG);
-    }
-    else if (vehicleType == 3)
-    {
-        int maxPassengers;
-        double maxWeightKG;
-        cout << "Max passengers: "; cin >> maxPassengers;
-        cout << "Max weight (kg): "; cin >> maxWeightKG;
-        success = militarySystem.addArmoredTransport(vehicleNumber, maxPassengers, maxWeightKG);
     }
     else
     {
-        cout << "Invalid vehicle type." << endl;
-        return;
+        int maxPassengers = readInt("Max passengers: ");
+        double maxWeightKG = readDouble("Max weight (kg): ");
+        success = militarySystem.addArmoredTransport(vehicleNumber, maxPassengers, maxWeightKG);
     }
 
     if (success) cout << "Vehicle added." << endl;
@@ -196,10 +228,8 @@ void addEquipment(MilitarySystem& militarySystem)
     cin >> equipmentName;
     cout << "Serial number: ";
     cin >> serialNumber;
-    cout << "Quantity: ";
-    cin >> quantity;
-    cout << "Status (0=WORKING 1=DAMAGED): ";
-    cin >> equipmentStatus;
+    quantity = readInt("Quantity: ");
+    equipmentStatus = readIntInRange("Status (0=WORKING 1=DAMAGED): ", 0, 1);
 
     if (militarySystem.addEquipment(warehouseName, equipmentName, serialNumber, quantity,
                                     (Equipment::eEquipmentStatus)equipmentStatus))
@@ -215,16 +245,13 @@ void addEquipment(MilitarySystem& militarySystem)
 void createTrainingMission(MilitarySystem& militarySystem)
 {
     char name[LINE_LEN];
-    int unitId, trainingType, difficultyLevel;
 
     cout << "Mission name: ";
     cin >> name;
-    cout << "Assigned unit ID: ";
-    cin >> unitId;
-    cout << "Training type (0=FITNESS 1=DRIVING 2=TECHNICAL 3=COMMAND): ";
-    cin >> trainingType;
-    cout << "Difficulty (0=EASY 1=MEDIUM 2=HARD): ";
-    cin >> difficultyLevel;
+    int unitId = readInt("Assigned unit ID: ");
+    int trainingType = readIntInRange(
+        "Training type (0=FITNESS 1=DRIVING 2=TECHNICAL 3=COMMAND): ", 0, 3);
+    int difficultyLevel = readIntInRange("Difficulty (0=EASY 1=MEDIUM 2=HARD): ", 0, 2);
 
     if (militarySystem.addTrainingMission(name, unitId,
                                           (TrainingMission::eTrainingType)trainingType,
@@ -241,7 +268,6 @@ void createTrainingMission(MilitarySystem& militarySystem)
 void createLogisticsMission(MilitarySystem& militarySystem)
 {
     char name[LINE_LEN];
-    int unitId;
 
     cout << "Mission name: ";
     cin >> name;
@@ -252,8 +278,7 @@ void createLogisticsMission(MilitarySystem& militarySystem)
         return;
     }
 
-    cout << "Assigned unit ID: ";
-    cin >> unitId;
+    int unitId = readInt("Assigned unit ID: ");
 
     int missionId = militarySystem.addLogisticsMission(name, unitId);
     if (missionId == -1)
@@ -327,18 +352,15 @@ void createLogisticsMission(MilitarySystem& militarySystem)
 
 void updateMissionStatus(MilitarySystem& militarySystem)
 {
-    int missionId, missionStatus;
-
     militarySystem.printAllMissions();
     if (militarySystem.getMissionsCount() == 0)
     {
         return;
     }
 
-    cout << "Mission ID: ";
-    cin >> missionId;
-    cout << "Status (0=NOT_STARTED 1=IN_PROGRESS 2=COMPLETED): ";
-    cin >> missionStatus;
+    int missionId = readInt("Mission ID: ");
+    int missionStatus = readIntInRange(
+        "Status (0=NOT_STARTED 1=IN_PROGRESS 2=COMPLETED): ", 0, 2);
 
     Mission* mission = militarySystem.findMission(missionId);
     if (!mission)
@@ -400,7 +422,6 @@ void printMenu()
 
 int main()
 {
-    srand((unsigned)time(nullptr));
     MilitarySystem militarySystem;
 
     cout << "Welcome to the Military Base Management System." << endl;
@@ -410,8 +431,7 @@ int main()
     do
     {
         printMenu();
-        cout << "Choice: ";
-        cin >> choice;
+        choice = readInt("Choice: ");
 
         try
         {
@@ -466,11 +486,6 @@ int main()
         catch (const std::exception& e)
         {
             cout << "Error: " << e.what() << endl;
-            if (cin.fail())
-            {
-                cin.clear();
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            }
         }
     } while (choice != 0);
 

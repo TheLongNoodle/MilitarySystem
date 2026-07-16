@@ -1,7 +1,10 @@
-﻿  Date.cpp
+﻿  ArmoredTransport.cpp
+  BaseFacility.cpp
+  Date.cpp
   Equipment.cpp
   Jeep.cpp
   LogisticsMission.cpp
+  main.cpp
   MilitarySystem.cpp
   Mission.cpp
   Officer.cpp
@@ -13,4 +16,4 @@
   Vehicle.cpp
   Warehouse.cpp
   Generating Code...
-  MilitarySystem.vcxproj -> D:\Afeka\Year_4\C++\MilitarySystem\x64\Debug\MilitarySystem.exe
+  MilitarySystem.vcxproj -> C:\Users\Dolev Telem\source\repos\MilitarySystem\x64\Debug\MilitarySystem.exe

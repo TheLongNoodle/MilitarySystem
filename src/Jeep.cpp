@@ -7,7 +7,6 @@ Jeep::Jeep(const char* vehicleNumber, int maxPassengers)
     : Vehicle(vehicleNumber), passengers(nullptr)
 {
     passengerCount = 0;
-    maxPassengers = 0;
     if (maxPassengers < 1)
     {
         throw std::invalid_argument("Jeep: maxPassengers must be >= 1");

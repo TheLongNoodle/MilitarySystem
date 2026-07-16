@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "MilitarySystem\\x64\\Debug\\Jeep.obj",
+            "outputs": [
+                "MilitarySystem\\x64\\Debug\\Jeep.cpp.obj.dt.module.json",
+                "MilitarySystem\\x64\\Debug\\Jeep.cpp.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}
