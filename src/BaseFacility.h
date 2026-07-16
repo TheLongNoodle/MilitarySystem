@@ -4,7 +4,8 @@
 class Vehicle;
 class Warehouse;
 
-class BaseFacility {
+class BaseFacility
+{
 private:
     Vehicle**   vehicles;
     int         vehicleCount;
@@ -21,10 +22,10 @@ public:
     BaseFacility(const BaseFacility& other) = delete;
     BaseFacility& operator=(const BaseFacility& other) = delete;
 
-    int              getVehicleCount() const;
-    const Vehicle*   getVehicle(int index) const;
+    int getVehicleCount() const;
+    const Vehicle* getVehicle(int index) const;
 
-    int              getWarehouseCount() const;
+    int getWarehouseCount() const;
     const Warehouse* getWarehouse(int index) const;
 
     bool addVehicle(Vehicle* vehicle);
@@ -32,11 +33,10 @@ public:
 
     bool addJeep(const char* vehicleNumber, int maxPassengers);
     bool addTruck(const char* vehicleNumber, double maxWeightKG);
-    bool addArmoredTransport(const char* vehicleNumber,
-                             int maxPassengers,
+    bool addArmoredTransport(const char* vehicleNumber, int maxPassengers,
                              double maxWeightKG);
 
-    const Vehicle*   findVehicle(const char* vehicleNumber) const;
+    const Vehicle* findVehicle(const char* vehicleNumber) const;
     const Warehouse* findWarehouse(const char* name) const;
 
     void printVehicles() const;
@@ -44,4 +44,4 @@ public:
     void print() const;
 };
 
-#endif // BASE_FACILITY_H
+#endif

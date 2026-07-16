@@ -3,11 +3,12 @@
 
 class Soldier;
 
-class Vehicle {
+class Vehicle
+{
 private:
     char* vehicleNumber;
-    bool  available;
-    bool  needsMaintenance;
+    bool available;
+    bool needsMaintenance;
 
     Soldier* driver;
 
@@ -21,9 +22,9 @@ public:
     Vehicle& operator=(const Vehicle& other) = delete;
 
     const char* getVehicleNumber() const;
-    bool        getAvailable() const;
-    bool        getNeedsMaintenance() const;
-    Soldier*    getDriver() const;
+    bool getAvailable() const;
+    bool getNeedsMaintenance() const;
+    Soldier* getDriver() const;
 
     bool setAvailability(bool status);
     bool sendToMaintenance();
@@ -32,4 +33,4 @@ public:
     virtual void print() const = 0;
 };
 
-#endif // VEHICLE_H
+#endif

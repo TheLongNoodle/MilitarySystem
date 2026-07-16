@@ -5,35 +5,36 @@
 
 class Unit;
 
-class TrainingMission : public Mission {
+class TrainingMission : public Mission
+{
 public:
-    enum class eTrainingType {
+    enum class eTrainingType
+    {
         FITNESS,
         DRIVING,
         TECHNICAL,
         COMMAND
     };
 
-    enum class eDifficultyLevel {
+    enum class eDifficultyLevel
+    {
         EASY,
         MEDIUM,
         HARD
     };
 
 private:
-    eTrainingType    trainingType;
+    eTrainingType trainingType;
     eDifficultyLevel difficultyLevel;
 
 public:
-    TrainingMission(const char* missionName,
-                    Unit& assignedUnit,
-                    eTrainingType trainingType,
-                    eDifficultyLevel difficultyLevel);
+    TrainingMission(const char* missionName, Unit& assignedUnit,
+                    eTrainingType trainingType, eDifficultyLevel difficultyLevel);
 
     TrainingMission(const TrainingMission& other) = delete;
     TrainingMission& operator=(const TrainingMission& other) = delete;
 
-    eTrainingType    getTrainingType() const;
+    eTrainingType getTrainingType() const;
     eDifficultyLevel getDifficultyLevel() const;
 
     bool setTrainingType(eTrainingType trainingType);
@@ -44,4 +45,4 @@ public:
     void print() const override;
 };
 
-#endif // TRAINING_MISSION_H
+#endif

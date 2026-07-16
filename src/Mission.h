@@ -3,9 +3,11 @@
 
 class Unit;
 
-class Mission {
+class Mission
+{
 public:
-    enum class eMissionStatus {
+    enum class eMissionStatus
+    {
         NOT_STARTED,
         IN_PROGRESS,
         COMPLETED
@@ -15,9 +17,9 @@ private:
     static int s_nextMissionId;
 
     char* missionName;
-    int   missionId;
+    int missionId;
     eMissionStatus status;
-    Unit& assignedUnit;   // reference member: bound at construction, non-rebindable
+    Unit& assignedUnit;
 
 public:
     Mission(const char* missionName, Unit& assignedUnit);
@@ -26,10 +28,10 @@ public:
     Mission(const Mission& other) = delete;
     Mission& operator=(const Mission& other) = delete;
 
-    const char*    getMissionName() const;
-    int            getMissionId() const;
+    const char* getMissionName() const;
+    int getMissionId() const;
     eMissionStatus getStatus() const;
-    const Unit&    getAssignedUnit() const;
+    const Unit& getAssignedUnit() const;
 
     bool setMissionName(const char* missionName);
     bool setStatus(eMissionStatus newStatus);
@@ -37,4 +39,4 @@ public:
     virtual void print() const = 0;
 };
 
-#endif // MISSION_H
+#endif

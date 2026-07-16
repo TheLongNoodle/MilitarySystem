@@ -5,7 +5,8 @@
 
 class Soldier;
 
-class Jeep : virtual public Vehicle {
+class Jeep : virtual public Vehicle
+{
 private:
     Soldier** passengers;
     int passengerCount;
@@ -19,8 +20,8 @@ public:
     Jeep(const Jeep& other) = delete;
     Jeep& operator=(const Jeep& other) = delete;
 
-    int      getMaxPassengers() const;
-    int      getPassengerCount() const;
+    int getMaxPassengers() const;
+    int getPassengerCount() const;
     Soldier* getPassenger(int index) const;
 
     bool setMaxPassengers(int maxPassengers);
@@ -31,4 +32,4 @@ public:
     void print() const override;
 };
 
-#endif // JEEP_H
+#endif

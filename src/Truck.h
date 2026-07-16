@@ -4,7 +4,8 @@
 #include "Vehicle.h"
 class Equipment;
 
-class Truck : virtual public Vehicle {
+class Truck : virtual public Vehicle
+{
 private:
     Equipment** loadedEquipment;
     int loadedCount;
@@ -19,9 +20,9 @@ public:
     Truck(const Truck& other) = delete;
     Truck& operator=(const Truck& other) = delete;
 
-    int        getLoadedCount() const;
+    int getLoadedCount() const;
     Equipment* getLoadedEquipment(int index) const;
-    double     getMaxWeightKG() const;
+    double getMaxWeightKG() const;
 
     bool setMaxWeightKG(double maxWeightKG);
 
@@ -31,4 +32,4 @@ public:
     void print() const override;
 };
 
-#endif // TRUCK_H
+#endif

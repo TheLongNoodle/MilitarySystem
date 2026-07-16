@@ -3,17 +3,16 @@
 
 #include "Soldier.h"
 
-class Officer : public Soldier {
+class Officer : public Soldier
+{
 private:
     Soldier** commandedSoldiers;
     int commandedCount;
     int commandedCapacity;
 
 public:
-    Officer(const char* name,
-            const Date& birthDate,
-            const char* role,
-            eRank rank);
+    Officer(const char* name, const Date& birthDate,
+            const char* role, eRank rank);
     ~Officer();
 
     Officer(const Officer& other) = delete;
@@ -29,4 +28,4 @@ public:
     void print() const override;
 };
 
-#endif // OFFICER_H
+#endif

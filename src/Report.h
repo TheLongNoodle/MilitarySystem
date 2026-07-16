@@ -1,7 +1,8 @@
 #ifndef REPORT_H
 #define REPORT_H
 
-class Report {
+class Report
+{
 private:
     int soldierCount;
     int unitCount;
@@ -10,11 +11,8 @@ private:
     int activeMissionCount;
 
 public:
-    Report(int soldierCount,
-           int unitCount,
-           int vehicleCount,
-           int equipmentCount,
-           int activeMissionCount);
+    Report(int soldierCount, int unitCount, int vehicleCount,
+           int equipmentCount, int activeMissionCount);
 
     int getSoldierCount() const;
     int getUnitCount() const;
@@ -25,4 +23,4 @@ public:
     void print() const;
 };
 
-#endif // REPORT_H
+#endif

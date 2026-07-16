@@ -1,9 +1,11 @@
 #ifndef EQUIPMENT_H
 #define EQUIPMENT_H
 
-class Equipment {
+class Equipment
+{
 public:
-    enum class eEquipmentStatus {
+    enum class eEquipmentStatus
+    {
         WORKING,
         DAMAGED
     };
@@ -15,10 +17,8 @@ private:
     eEquipmentStatus status;
 
 public:
-    Equipment(const char* name,
-              const char* serialNumber,
-              int quantity,
-              eEquipmentStatus status);
+    Equipment(const char* name, const char* serialNumber,
+              int quantity, eEquipmentStatus status);
     ~Equipment();
 
     Equipment(const Equipment& other) = delete;
@@ -37,4 +37,4 @@ public:
     void print() const;
 };
 
-#endif // EQUIPMENT_H
+#endif

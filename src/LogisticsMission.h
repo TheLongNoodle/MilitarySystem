@@ -7,7 +7,8 @@ class Unit;
 
 class Vehicle;
 
-class LogisticsMission : public Mission {
+class LogisticsMission : public Mission
+{
 private:
     Vehicle* assignedVehicle;
 
@@ -22,8 +23,8 @@ public:
     LogisticsMission(const LogisticsMission& other) = delete;
     LogisticsMission& operator=(const LogisticsMission& other) = delete;
 
-    Vehicle*   getAssignedVehicle() const;
-    int        getRequiredEquipmentCount() const;
+    Vehicle* getAssignedVehicle() const;
+    int getRequiredEquipmentCount() const;
     Equipment* getRequiredEquipment(int index) const;
 
     bool setAssignedVehicle(Vehicle* vehicle);
@@ -34,4 +35,4 @@ public:
     void print() const override;
 };
 
-#endif // LOGISTICS_MISSION_H
+#endif

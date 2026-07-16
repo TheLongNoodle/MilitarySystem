@@ -3,12 +3,13 @@
 
 class Soldier;
 
-class Unit {
+class Unit
+{
 private:
     static int s_nextUnitId;
 
     char* unitName;
-    int   unitId;
+    int unitId;
 
     Soldier** soldiers;
     int count;
@@ -22,9 +23,9 @@ public:
     Unit& operator=(const Unit& other) = delete;
 
     const char* getUnitName() const;
-    int         getUnitId() const;
-    int         getSoldierCount() const;
-    Soldier*    getSoldier(int index) const;
+    int getUnitId() const;
+    int getSoldierCount() const;
+    Soldier* getSoldier(int index) const;
 
     bool setUnitName(const char* name);
 
@@ -32,9 +33,7 @@ public:
     bool removeSoldier(const Soldier* soldier);
     void printSoldiers() const;
 
-    // Idiomatic equivalent of addSoldier: u += soldierPtr;
-    // Returns *this for chaining: (u += s1) += s2;
     Unit& operator+=(Soldier* soldier);
 };
 
-#endif // UNIT_H
+#endif
