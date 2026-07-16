@@ -38,7 +38,23 @@
     <ClInclude Include="src\Warehouse.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ArmoredTransport.cpp" />
+    <ClCompile Include="src\BaseFacility.cpp" />
+    <ClCompile Include="src\Date.cpp" />
+    <ClCompile Include="src\Equipment.cpp" />
+    <ClCompile Include="src\Jeep.cpp" />
+    <ClCompile Include="src\LogisticsMission.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MilitarySystem.cpp" />
+    <ClCompile Include="src\Mission.cpp" />
+    <ClCompile Include="src\Officer.cpp" />
+    <ClCompile Include="src\Report.cpp" />
+    <ClCompile Include="src\Soldier.cpp" />
+    <ClCompile Include="src\TrainingMission.cpp" />
+    <ClCompile Include="src\Truck.cpp" />
+    <ClCompile Include="src\Unit.cpp" />
+    <ClCompile Include="src\Vehicle.cpp" />
+    <ClCompile Include="src\Warehouse.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>

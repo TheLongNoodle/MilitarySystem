@@ -17,8 +17,8 @@ private:
     eEquipmentStatus status;
 
 public:
-    Equipment(const char* name, const char* serialNumber,
-              int quantity, eEquipmentStatus status);
+    Equipment(const char* name, const char* serialNumber, int quantity,
+              eEquipmentStatus status);
     ~Equipment();
 
     Equipment(const Equipment& other) = delete;

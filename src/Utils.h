@@ -1,3 +1,4 @@
+#pragma warning (disable: 4996)
 #ifndef UTILS_H
 #define UTILS_H
 

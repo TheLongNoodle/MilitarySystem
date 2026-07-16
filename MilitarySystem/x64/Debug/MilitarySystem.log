@@ -1,35 +1,16 @@
-﻿  main.cpp
-main.obj : error LNK2019: unresolved external symbol "public: int __cdecl BaseFacility::getVehicleCount(void)const " (?getVehicleCount@BaseFacility@@QEBAHXZ) referenced in function "void __cdecl createLogisticsMission(class MilitarySystem &)" (?createLogisticsMission@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: int __cdecl BaseFacility::getWarehouseCount(void)const " (?getWarehouseCount@BaseFacility@@QEBAHXZ) referenced in function "void __cdecl addEquipment(class MilitarySystem &)" (?addEquipment@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: __cdecl Date::Date(int,int,int)" (??0Date@@QEAA@HHH@Z) referenced in function "void __cdecl addOfficer(class MilitarySystem &)" (?addOfficer@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl Mission::setStatus(enum Mission::eMissionStatus)" (?setStatus@Mission@@QEAA_NW4eMissionStatus@1@@Z) referenced in function "void __cdecl updateMissionStatus(class MilitarySystem &)" (?updateMissionStatus@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: void __cdecl Report::print(void)const " (?print@Report@@QEBAXXZ) referenced in function main
-main.obj : error LNK2019: unresolved external symbol "public: __cdecl MilitarySystem::MilitarySystem(void)" (??0MilitarySystem@@QEAA@XZ) referenced in function main
-main.obj : error LNK2019: unresolved external symbol "public: __cdecl MilitarySystem::~MilitarySystem(void)" (??1MilitarySystem@@QEAA@XZ) referenced in function main
-main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addSoldier(char const *,class Date const &,char const *,enum Soldier::eRank)" (?addSoldier@MilitarySystem@@QEAA_NPEBDAEBVDate@@0W4eRank@Soldier@@@Z) referenced in function "void __cdecl addSoldier(class MilitarySystem &)" (?addSoldier@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addOfficer(char const *,class Date const &,char const *,enum Soldier::eRank)" (?addOfficer@MilitarySystem@@QEAA_NPEBDAEBVDate@@0W4eRank@Soldier@@@Z) referenced in function "void __cdecl addOfficer(class MilitarySystem &)" (?addOfficer@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addUnit(char const *)" (?addUnit@MilitarySystem@@QEAA_NPEBD@Z) referenced in function "void __cdecl createUnit(class MilitarySystem &)" (?createUnit@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::transferSoldier(int,int)" (?transferSoldier@MilitarySystem@@QEAA_NHH@Z) referenced in function "void __cdecl transferSoldier(class MilitarySystem &)" (?transferSoldier@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addWarehouse(char const *)" (?addWarehouse@MilitarySystem@@QEAA_NPEBD@Z) referenced in function "void __cdecl addWarehouse(class MilitarySystem &)" (?addWarehouse@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addEquipment(char const *,char const *,char const *,int,enum Equipment::eEquipmentStatus)" (?addEquipment@MilitarySystem@@QEAA_NPEBD00HW4eEquipmentStatus@Equipment@@@Z) referenced in function "void __cdecl addEquipment(class MilitarySystem &)" (?addEquipment@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: class Vehicle * __cdecl MilitarySystem::findVehicle(char const *)const " (?findVehicle@MilitarySystem@@QEBAPEAVVehicle@@PEBD@Z) referenced in function "void __cdecl markVehicleMaintenance(class MilitarySystem &)" (?markVehicleMaintenance@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addJeep(char const *,int)" (?addJeep@MilitarySystem@@QEAA_NPEBDH@Z) referenced in function "void __cdecl addVehicle(class MilitarySystem &)" (?addVehicle@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addTruck(char const *,double)" (?addTruck@MilitarySystem@@QEAA_NPEBDN@Z) referenced in function "void __cdecl addVehicle(class MilitarySystem &)" (?addVehicle@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addArmoredTransport(char const *,int,double)" (?addArmoredTransport@MilitarySystem@@QEAA_NPEBDHN@Z) referenced in function "void __cdecl addVehicle(class MilitarySystem &)" (?addVehicle@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: void __cdecl MilitarySystem::printAllVehicles(void)const " (?printAllVehicles@MilitarySystem@@QEBAXXZ) referenced in function "void __cdecl createLogisticsMission(class MilitarySystem &)" (?createLogisticsMission@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: void __cdecl MilitarySystem::printAllWarehouses(void)const " (?printAllWarehouses@MilitarySystem@@QEBAXXZ) referenced in function "void __cdecl addEquipment(class MilitarySystem &)" (?addEquipment@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::warehouseExists(char const *)const " (?warehouseExists@MilitarySystem@@QEBA_NPEBD@Z) referenced in function "void __cdecl addEquipment(class MilitarySystem &)" (?addEquipment@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addTrainingMission(char const *,int,enum TrainingMission::eTrainingType,enum TrainingMission::eDifficultyLevel)" (?addTrainingMission@MilitarySystem@@QEAA_NPEBDHW4eTrainingType@TrainingMission@@W4eDifficultyLevel@3@@Z) referenced in function "void __cdecl createTrainingMission(class MilitarySystem &)" (?createTrainingMission@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: int __cdecl MilitarySystem::addLogisticsMission(char const *,int)" (?addLogisticsMission@MilitarySystem@@QEAAHPEBDH@Z) referenced in function "void __cdecl createLogisticsMission(class MilitarySystem &)" (?createLogisticsMission@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: class Mission * __cdecl MilitarySystem::findMission(int)const " (?findMission@MilitarySystem@@QEBAPEAVMission@@H@Z) referenced in function "void __cdecl updateMissionStatus(class MilitarySystem &)" (?updateMissionStatus@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::setMissionVehicle(int,char const *)" (?setMissionVehicle@MilitarySystem@@QEAA_NHPEBD@Z) referenced in function "void __cdecl createLogisticsMission(class MilitarySystem &)" (?createLogisticsMission@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl MilitarySystem::addMissionEquipment(int,char const *,char const *)" (?addMissionEquipment@MilitarySystem@@QEAA_NHPEBD0@Z) referenced in function "void __cdecl createLogisticsMission(class MilitarySystem &)" (?createLogisticsMission@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: class BaseFacility & __cdecl MilitarySystem::getBase(void)" (?getBase@MilitarySystem@@QEAAAEAVBaseFacility@@XZ) referenced in function "void __cdecl addEquipment(class MilitarySystem &)" (?addEquipment@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: void __cdecl MilitarySystem::printAllUnits(void)const " (?printAllUnits@MilitarySystem@@QEBAXXZ) referenced in function "void __cdecl createLogisticsMission(class MilitarySystem &)" (?createLogisticsMission@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: void __cdecl MilitarySystem::printAllMissions(void)const " (?printAllMissions@MilitarySystem@@QEBAXXZ) referenced in function "void __cdecl updateMissionStatus(class MilitarySystem &)" (?updateMissionStatus@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: int __cdecl MilitarySystem::getUnitsCount(void)const " (?getUnitsCount@MilitarySystem@@QEBAHXZ) referenced in function "void __cdecl createLogisticsMission(class MilitarySystem &)" (?createLogisticsMission@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: int __cdecl MilitarySystem::getMissionsCount(void)const " (?getMissionsCount@MilitarySystem@@QEBAHXZ) referenced in function "void __cdecl updateMissionStatus(class MilitarySystem &)" (?updateMissionStatus@@YAXAEAVMilitarySystem@@@Z)
-main.obj : error LNK2019: unresolved external symbol "public: class Report __cdecl MilitarySystem::generateReport(void)const " (?generateReport@MilitarySystem@@QEBA?AVReport@@XZ) referenced in function main
-main.obj : error LNK2019: unresolved external symbol "public: void __cdecl MilitarySystem::printAllData(void)const " (?printAllData@MilitarySystem@@QEBAXXZ) referenced in function main
-main.obj : error LNK2019: unresolved external symbol "public: bool __cdecl Vehicle::sendToMaintenance(void)" (?sendToMaintenance@Vehicle@@QEAA_NXZ) referenced in function "void __cdecl markVehicleMaintenance(class MilitarySystem &)" (?markVehicleMaintenance@@YAXAEAVMilitarySystem@@@Z)
-D:\Afeka\Year_4\C++\MilitarySystem\x64\Debug\MilitarySystem.exe : fatal error LNK1120: 33 unresolved externals
+﻿  Date.cpp
+  Equipment.cpp
+  Jeep.cpp
+  LogisticsMission.cpp
+  MilitarySystem.cpp
+  Mission.cpp
+  Officer.cpp
+  Report.cpp
+  Soldier.cpp
+  TrainingMission.cpp
+  Truck.cpp
+  Unit.cpp
+  Vehicle.cpp
+  Warehouse.cpp
+  Generating Code...
+  MilitarySystem.vcxproj -> D:\Afeka\Year_4\C++\MilitarySystem\x64\Debug\MilitarySystem.exe
