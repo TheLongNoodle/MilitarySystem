@@ -4,10 +4,6 @@
 #include "Soldier.h"
 #include "LinkedList.h"
 
-// Part 3: the dynamic Soldier** array was replaced with the generic
-// LinkedList (requirement B), which removed the manual count/capacity
-// bookkeeping and the destructor. Copying is already deleted in Soldier,
-// so the redundant deleted copy operations were removed as well.
 class Officer : public Soldier
 {
 private:

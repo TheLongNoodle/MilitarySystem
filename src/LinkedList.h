@@ -3,12 +3,6 @@
 
 #include <iostream>
 
-// Generic singly linked list (part 3, requirement A).
-// Public operations are limited to what the assignment allows: adding an
-// element to the end, removing an element and printing. A minimal const
-// iterator (the Iterator design pattern) is exposed so that owners of a
-// list can traverse it for display/search without the list knowing how
-// its elements should be rendered. Implemented without any STL types.
 template<typename T>
 class LinkedList {
 private:
@@ -36,7 +30,6 @@ public:
         }
     }
 
-    // The list owns raw nodes, so shallow copies would double-delete them.
     LinkedList(const LinkedList& other) = delete;
     LinkedList& operator=(const LinkedList& other) = delete;
 

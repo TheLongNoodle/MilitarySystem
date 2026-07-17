@@ -6,10 +6,6 @@
 
 class Soldier;
 
-// Part 3: unitName became std::string and the soldiers array became a
-// std::vector of non-owning pointers, so the destructor and manual
-// count/capacity fields were removed. Copying stays deleted: a Unit has a
-// unique identity (unitId) and soldiers hold back-pointers to it.
 class Unit
 {
 private:

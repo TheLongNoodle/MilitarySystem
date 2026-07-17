@@ -4,8 +4,6 @@
 #include <string>
 #include <iosfwd>
 
-// Part 3: char* fields replaced with std::string, so the destructor and the
-// deleted copy operations became unnecessary and were removed (rule of zero).
 class Equipment
 {
 public:

@@ -15,8 +15,7 @@
 
 MilitarySystem& MilitarySystem::getInstance()
 {
-    // Meyers singleton: constructed on first use, destroyed automatically
-    // at program exit, no dynamic allocation needed.
+    // Singleton
     static MilitarySystem instance;
     return instance;
 }

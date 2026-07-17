@@ -17,8 +17,6 @@ public:
         COMPLETED
     };
 
-    // Shared status-to-text translation for every mission type (previously
-    // duplicated in TrainingMission.cpp and LogisticsMission.cpp).
     static const char* statusName(eMissionStatus status);
 
 private:
@@ -29,17 +27,12 @@ private:
     eMissionStatus status;
     Unit& assignedUnit;
 
-    // Observer pattern: non-owning subscribers notified on status changes.
     std::vector<MissionObserver*> observers;
 
 public:
     Mission(const std::string& missionName, Unit& assignedUnit);
-    // Part 3: nothing left to release, but missions are deleted through
-    // Mission*, so the destructor must stay virtual.
     virtual ~Mission() = default;
 
-    // Copying stays deleted: the reference member cannot be reseated and a
-    // mission has a unique identity (missionId).
     Mission(const Mission& other) = delete;
     Mission& operator=(const Mission& other) = delete;
 

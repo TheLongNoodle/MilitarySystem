@@ -6,10 +6,6 @@
 
 class Soldier;
 
-// Part 3: the passengers array became a std::vector of non-owning pointers,
-// so the destructor was removed. maxPassengers is a domain rule (seating
-// capacity), not container bookkeeping, so it remains a field. The deleted
-// copy operations were removed as redundant - Vehicle already forbids copying.
 class Jeep : virtual public Vehicle
 {
 private:

@@ -16,11 +16,6 @@ class Warehouse;
 class Mission;
 class MissionObserver;
 
-// Part 3: the managing class is a Singleton (requirement F) - there is one
-// military system in the program, created on first use via getInstance().
-// The three object arrays became std::vector. The destructor and the
-// deleted copy operations REMAIN: the system owns every Soldier, Unit and
-// Mission behind its pointers.
 class MilitarySystem
 {
 private:
@@ -30,14 +25,10 @@ private:
 
     BaseFacility base;
 
-    // Observer attached to every mission the system creates (may be null).
     MissionObserver* missionObserver;
 
     MilitarySystem();
 
-    // Private non-const lookups for internal editing; the public const
-    // versions below serve read-only callers (replaces the const_cast
-    // pattern used in part 2).
     Soldier* findSoldierMutable(int personalNumber);
     Unit* findUnitMutable(int unitId);
     Warehouse* findWarehouseMutable(const std::string& name);

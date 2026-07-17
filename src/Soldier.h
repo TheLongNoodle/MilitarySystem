@@ -36,12 +36,8 @@ private:
 public:
     Soldier(const std::string& name, const Date& birthDate,
             const std::string& role, eRank rank);
-    // Part 3: string members freed the destructor of any work, but the class
-    // is a polymorphic base (Officer), so a virtual destructor must remain.
     virtual ~Soldier() = default;
 
-    // Copying stays deleted: a Soldier has a unique identity (personal
-    // number) and a back-pointer from its Unit; a copy would break both.
     Soldier(const Soldier& other) = delete;
     Soldier& operator=(const Soldier& other) = delete;
 

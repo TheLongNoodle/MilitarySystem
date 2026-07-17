@@ -9,10 +9,6 @@ class Unit;
 
 class Vehicle;
 
-// Part 3: the required-equipment array became a std::vector of non-owning
-// pointers, so the destructor and count/capacity fields were removed. The
-// deleted copy operations were removed as redundant - Mission already
-// forbids copying.
 class LogisticsMission : public Mission
 {
 private:

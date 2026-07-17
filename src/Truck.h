@@ -6,10 +6,6 @@
 
 class Equipment;
 
-// Part 3: the loaded-equipment array became a std::vector of non-owning
-// pointers, so the destructor and count/capacity fields were removed. The
-// deleted copy operations were removed as redundant - Vehicle already
-// forbids copying.
 class Truck : virtual public Vehicle
 {
 private:
