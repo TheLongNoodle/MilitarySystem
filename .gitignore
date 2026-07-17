@@ -1,0 +1,11 @@
+# Whitelist approach: ignore everything in the repo root, then re-include
+# only the files needed to build, review and grade the project.
+/*
+
+!/.gitignore
+!/src/
+!/*.vcxproj
+!/*.vcxproj.filters
+!/*.slnx
+!/*.docx
+!/*.pdf
