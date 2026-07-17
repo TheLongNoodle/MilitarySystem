@@ -2,27 +2,25 @@
 #define OFFICER_H
 
 #include "Soldier.h"
+#include "LinkedList.h"
 
+// Part 3: the dynamic Soldier** array was replaced with the generic
+// LinkedList (requirement B), which removed the manual count/capacity
+// bookkeeping and the destructor. Copying is already deleted in Soldier,
+// so the redundant deleted copy operations were removed as well.
 class Officer : public Soldier
 {
 private:
-    Soldier** commandedSoldiers;
-    int commandedCount;
-    int commandedCapacity;
+    LinkedList<Soldier*> commandedSoldiers;
 
 public:
-    Officer(const char* name, const Date& birthDate,
-            const char* role, eRank rank);
-    ~Officer();
-
-    Officer(const Officer& other) = delete;
-    Officer& operator=(const Officer& other) = delete;
+    Officer(const std::string& name, const Date& birthDate,
+            const std::string& role, eRank rank);
 
     int getCommandedCount() const;
-    Soldier* getCommandedSoldier(int index) const;
 
     bool addCommandedSoldier(Soldier* soldier);
-    bool removeCommandedSoldier(const Soldier* soldier);
+    bool removeCommandedSoldier(Soldier* soldier);
     void printCommandedSoldiers() const;
 
     void print() const override;

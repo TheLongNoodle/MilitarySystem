@@ -1,41 +1,21 @@
 #include "Unit.h"
 #include "Soldier.h"
-#include "Utils.h"
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 
 int Unit::s_nextUnitId = 100;
 
-Unit::Unit(const char* unitName) : unitName(nullptr), soldiers(nullptr)
+Unit::Unit(const std::string& unitName) : unitName(unitName)
 {
-    count = 0;
-
-    if (!unitName || unitName[0] == '\0')
+    if (unitName.empty())
     {
         throw std::invalid_argument("Unit: name must not be empty");
-    }
-
-    this->unitName = utils::dupString(unitName);
-    try
-    {
-        capacity = 8;
-        soldiers = new Soldier*[capacity];
-    }
-    catch (...)
-    {
-        delete[] this->unitName;
-        throw;
     }
     unitId = s_nextUnitId++;
 }
 
-Unit::~Unit()
-{
-    delete[] unitName;
-    delete[] soldiers;
-}
-
-const char* Unit::getUnitName() const
+const std::string& Unit::getUnitName() const
 {
     return unitName;
 }
@@ -45,27 +25,25 @@ int Unit::getUnitId() const
 }
 int Unit::getSoldierCount() const
 {
-    return count;
+    return (int)soldiers.size();
 }
 
 Soldier* Unit::getSoldier(int index) const
 {
-    if (index < 0 || index >= count)
+    if (index < 0 || index >= (int)soldiers.size())
     {
         return nullptr;
     }
     return soldiers[index];
 }
 
-bool Unit::setUnitName(const char* n)
+bool Unit::setUnitName(const std::string& n)
 {
-    if (!n || n[0] == '\0')
+    if (n.empty())
     {
         return false;
     }
-    char* tmp = utils::dupString(n);
-    delete[] unitName;
-    unitName = tmp;
+    unitName = n;
     return true;
 }
 
@@ -75,27 +53,11 @@ bool Unit::addSoldier(Soldier* soldier)
     {
         return false;
     }
-    for (int i = 0; i < count; ++i)
+    if (std::find(soldiers.begin(), soldiers.end(), soldier) != soldiers.end())
     {
-        if (soldiers[i] == soldier)
-        {
-            return false;
-        }
+        return false;
     }
-
-    if (count == capacity)
-    {
-        const int newCap = capacity * 2;
-        Soldier** larger = new Soldier*[newCap];
-        for (int i = 0; i < count; ++i)
-        {
-            larger[i] = soldiers[i];
-        }
-        delete[] soldiers;
-        soldiers = larger;
-        capacity = newCap;
-    }
-    soldiers[count++] = soldier;
+    soldiers.push_back(soldier);
     return true;
 }
 
@@ -105,28 +67,22 @@ bool Unit::removeSoldier(const Soldier* soldier)
     {
         return false;
     }
-    for (int i = 0; i < count; ++i)
+    auto it = std::find(soldiers.begin(), soldiers.end(), soldier);
+    if (it == soldiers.end())
     {
-        if (soldiers[i] == soldier)
-        {
-            for (int j = i; j < count - 1; ++j)
-            {
-                soldiers[j] = soldiers[j + 1];
-            }
-            --count;
-            return true;
-        }
+        return false;
     }
-    return false;
+    soldiers.erase(it);
+    return true;
 }
 
 void Unit::printSoldiers() const
 {
     std::cout << "  Unit [" << unitId << "] '" << unitName
-              << "' (" << count << " soldier(s)):" << std::endl;
-    for (int i = 0; i < count; ++i)
+              << "' (" << soldiers.size() << " soldier(s)):" << std::endl;
+    for (const Soldier* soldier : soldiers)
     {
-        std::cout << "    " << *soldiers[i] << std::endl;
+        std::cout << "    " << *soldier << std::endl;
     }
 }
 

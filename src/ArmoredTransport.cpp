@@ -1,7 +1,8 @@
 #include "ArmoredTransport.h"
 #include <iostream>
 
-ArmoredTransport::ArmoredTransport(const char* vehicleNumber, int maxPassengers, double maxWeightKG)
+ArmoredTransport::ArmoredTransport(const std::string& vehicleNumber,
+                                   int maxPassengers, double maxWeightKG)
     : Vehicle(vehicleNumber), Jeep(vehicleNumber, maxPassengers), Truck(vehicleNumber, maxWeightKG)
 {
 }

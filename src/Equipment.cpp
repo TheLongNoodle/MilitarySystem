@@ -1,5 +1,4 @@
 #include "Equipment.h"
-#include "Utils.h"
 #include <iostream>
 #include <stdexcept>
 
@@ -15,14 +14,15 @@ static const char* statusName(Equipment::eEquipmentStatus s)
     return "?";
 }
 
-Equipment::Equipment(const char* name, const char* serialNumber, int quantity, eEquipmentStatus status)
-         : name(nullptr), serialNumber(nullptr)
+Equipment::Equipment(const std::string& name, const std::string& serialNumber,
+                     int quantity, eEquipmentStatus status)
+         : name(name), serialNumber(serialNumber), quantity(quantity), status(status)
 {
-    if (!name || name[0] == '\0')
+    if (name.empty())
     {
         throw std::invalid_argument("Equipment: name must not be empty");
     }
-    if (!serialNumber || serialNumber[0] == '\0')
+    if (serialNumber.empty())
     {
         throw std::invalid_argument("Equipment: serial number must not be empty");
     }
@@ -30,33 +30,14 @@ Equipment::Equipment(const char* name, const char* serialNumber, int quantity, e
     {
         throw std::invalid_argument("Equipment: quantity must be non-negative");
     }
-
-    this->name = utils::dupString(name);
-    try
-    {
-        this->serialNumber = utils::dupString(serialNumber);
-    }
-    catch (...)
-    {
-        delete[] this->name;
-        throw;
-    }
-    this->quantity = quantity;
-    this->status = status;
 }
 
-Equipment::~Equipment()
-{
-    delete[] name;
-    delete[] serialNumber;
-}
-
-const char* Equipment::getName() const
+const std::string& Equipment::getName() const
 {
     return name;
 }
 
-const char* Equipment::getSerialNumber() const
+const std::string& Equipment::getSerialNumber() const
 {
     return serialNumber;
 }
@@ -71,27 +52,23 @@ Equipment::eEquipmentStatus Equipment::getStatus() const
     return status;
 }
 
-bool Equipment::setName(const char* n)
+bool Equipment::setName(const std::string& n)
 {
-    if (!n || n[0] == '\0')
+    if (n.empty())
     {
         return false;
     }
-    char* tmp = utils::dupString(n);
-    delete[] name;
-    name = tmp;
+    name = n;
     return true;
 }
 
-bool Equipment::setSerialNumber(const char* sn)
+bool Equipment::setSerialNumber(const std::string& sn)
 {
-    if (!sn || sn[0] == '\0')
+    if (sn.empty())
     {
         return false;
     }
-    char* tmp = utils::dupString(sn);
-    delete[] serialNumber;
-    serialNumber = tmp;
+    serialNumber = sn;
     return true;
 }
 
@@ -113,9 +90,14 @@ bool Equipment::setStatus(eEquipmentStatus s)
 
 void Equipment::print() const
 {
-    std::cout << "    Equipment '" << name
-              << "' (S/N " << serialNumber
-              << ") x" << quantity
-              << " [" << statusName(status) << "]"
-              << std::endl;
+    std::cout << "    " << *this << std::endl;
+}
+
+std::ostream& operator<<(std::ostream& os, const Equipment& e)
+{
+    os << "Equipment '" << e.getName()
+       << "' (S/N " << e.getSerialNumber()
+       << ") x" << e.getQuantity()
+       << " [" << statusName(e.getStatus()) << "]";
+    return os;
 }

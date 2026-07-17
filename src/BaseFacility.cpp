@@ -1,57 +1,34 @@
 #include "BaseFacility.h"
 #include "Vehicle.h"
 #include "Warehouse.h"
-#include "Jeep.h"
-#include "Truck.h"
-#include "ArmoredTransport.h"
 #include "Equipment.h"
 #include <iostream>
-#include <cstring>
-
-BaseFacility::BaseFacility() : vehicles(nullptr),  vehicleCount(0), vehicleCapacity(0),
-                               warehouses(nullptr), warehouseCount(0), warehouseCapacity(0)
-{
-    vehicleCapacity = 8;
-    vehicles = new Vehicle*[vehicleCapacity];
-    try
-    {
-        warehouseCapacity = 4;
-        warehouses = new Warehouse*[warehouseCapacity];
-    }
-    catch (...)
-    {
-        delete[] vehicles;
-        throw;
-    }
-}
 
 BaseFacility::~BaseFacility()
 {
-    for (int i = 0; i < vehicleCount; ++i)
+    for (Vehicle* vehicle : vehicles)
     {
-        delete vehicles[i];
+        delete vehicle;
     }
-    delete[] vehicles;
-    for (int i = 0; i < warehouseCount; ++i)
+    for (Warehouse* warehouse : warehouses)
     {
-        delete warehouses[i];
+        delete warehouse;
     }
-    delete[] warehouses;
 }
 
 int BaseFacility::getVehicleCount()   const
 {
-    return vehicleCount;
+    return (int)vehicles.size();
 }
 
 int BaseFacility::getWarehouseCount() const
 {
-    return warehouseCount;
+    return (int)warehouses.size();
 }
 
 const Vehicle* BaseFacility::getVehicle(int index) const
 {
-    if (index < 0 || index >= vehicleCount)
+    if (index < 0 || index >= (int)vehicles.size())
     {
         return nullptr;
     }
@@ -60,7 +37,7 @@ const Vehicle* BaseFacility::getVehicle(int index) const
 
 const Warehouse* BaseFacility::getWarehouse(int index) const
 {
-    if (index < 0 || index >= warehouseCount)
+    if (index < 0 || index >= (int)warehouses.size())
     {
         return nullptr;
     }
@@ -73,19 +50,7 @@ bool BaseFacility::addVehicle(Vehicle* vehicle)
     {
         return false;
     }
-    if (vehicleCount == vehicleCapacity)
-    {
-        const int newCap = vehicleCapacity * 2;
-        Vehicle** larger = new Vehicle*[newCap];
-        for (int i = 0; i < vehicleCount; ++i)
-        {
-            larger[i] = vehicles[i];
-        }
-        delete[] vehicles;
-        vehicles = larger;
-        vehicleCapacity = newCap;
-    }
-    vehicles[vehicleCount++] = vehicle;
+    vehicles.push_back(vehicle);
     return true;
 }
 
@@ -95,95 +60,43 @@ bool BaseFacility::addWarehouse(Warehouse* warehouse)
     {
         return false;
     }
-    if (warehouseCount == warehouseCapacity)
+    warehouses.push_back(warehouse);
+    return true;
+}
+
+bool BaseFacility::addVehicle(VehicleFactory::eVehicleType type,
+                              const std::string& vehicleNumber,
+                              int maxPassengers,
+                              double maxWeightKG)
+{
+    if (findVehicle(vehicleNumber))
     {
-        const int newCap = warehouseCapacity * 2;
-        Warehouse** larger = new Warehouse*[newCap];
-        for (int i = 0; i < warehouseCount; ++i)
+        return false;
+    }
+    Vehicle* v = VehicleFactory::create(type, vehicleNumber, maxPassengers, maxWeightKG);
+    vehicles.push_back(v);
+    return true;
+}
+
+const Vehicle* BaseFacility::findVehicle(const std::string& vehicleNumber) const
+{
+    for (const Vehicle* vehicle : vehicles)
+    {
+        if (vehicle->getVehicleNumber() == vehicleNumber)
         {
-            larger[i] = warehouses[i];
-        }
-        delete[] warehouses;
-        warehouses = larger;
-        warehouseCapacity = newCap;
-    }
-    warehouses[warehouseCount++] = warehouse;
-    return true;
-}
-
-bool BaseFacility::addJeep(const char* vehicleNumber, int maxPassengers)
-{
-    if (findVehicle(vehicleNumber))
-    {
-        return false;
-    }
-    Vehicle* v = new Jeep(vehicleNumber, maxPassengers);
-    if (!addVehicle(v))
-    {
-        delete v;
-        return false;
-    }
-    return true;
-}
-
-bool BaseFacility::addTruck(const char* vehicleNumber, double maxWeightKG)
-{
-    if (findVehicle(vehicleNumber))
-    {
-        return false;
-    }
-    Vehicle* v = new Truck(vehicleNumber, maxWeightKG);
-    if (!addVehicle(v))
-    {
-        delete v;
-        return false;
-    }
-    return true;
-}
-
-bool BaseFacility::addArmoredTransport(const char* vehicleNumber, int maxPassengers,
-                                       double maxWeightKG)
-{
-    if (findVehicle(vehicleNumber))
-    {
-        return false;
-    }
-    Vehicle* v = new ArmoredTransport(vehicleNumber, maxPassengers, maxWeightKG);
-    if (!addVehicle(v))
-    {
-        delete v;
-        return false;
-    }
-    return true;
-}
-
-const Vehicle* BaseFacility::findVehicle(const char* vehicleNumber) const
-{
-    if (!vehicleNumber)
-    {
-        return nullptr;
-    }
-    for (int i = 0; i < vehicleCount; ++i)
-    {
-        if (std::strcmp(vehicles[i]->getVehicleNumber(), vehicleNumber) == 0)
-        {
-            return vehicles[i];
+            return vehicle;
         }
     }
     return nullptr;
 }
 
-const Warehouse* BaseFacility::findWarehouse(const char* name) const
+const Warehouse* BaseFacility::findWarehouse(const std::string& name) const
 {
-    if (!name)
+    for (const Warehouse* warehouse : warehouses)
     {
-        return nullptr;
-    }
-    for (int i = 0; i < warehouseCount; ++i)
-    {
-        if (std::strcmp(warehouses[i]->getName(), name) == 0)
+        if (warehouse->getName() == name)
         {
-            return warehouses[i];
+            return warehouse;
         }
     }
     return nullptr;
@@ -191,19 +104,19 @@ const Warehouse* BaseFacility::findWarehouse(const char* name) const
 
 void BaseFacility::printVehicles() const
 {
-    std::cout << "--- Vehicles (" << vehicleCount << ") ---" << std::endl;
-    for (int i = 0; i < vehicleCount; ++i)
+    std::cout << "--- Vehicles (" << vehicles.size() << ") ---" << std::endl;
+    for (const Vehicle* vehicle : vehicles)
     {
-        vehicles[i]->print();
+        vehicle->print();
     }
 }
 
 void BaseFacility::printWarehouses() const
 {
-    std::cout << "--- Warehouses (" << warehouseCount << ") ---" << std::endl;
-    for (int i = 0; i < warehouseCount; ++i)
+    std::cout << "--- Warehouses (" << warehouses.size() << ") ---" << std::endl;
+    for (const Warehouse* warehouse : warehouses)
     {
-        warehouses[i]->printEquipment();
+        warehouse->printEquipment();
     }
 }
 

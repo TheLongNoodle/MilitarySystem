@@ -2,96 +2,67 @@
 #include "Soldier.h"
 #include <iostream>
 
-Officer::Officer(const char* name, const Date& birthDate, const char* role, eRank rank)
-    : Soldier(name, birthDate, role, rank), commandedSoldiers(nullptr)
+Officer::Officer(const std::string& name, const Date& birthDate,
+                 const std::string& role, eRank rank)
+    : Soldier(name, birthDate, role, rank)
 {
-    commandedCount = 0;
-    commandedCapacity = 4;
-    commandedSoldiers = new Soldier*[commandedCapacity];
-}
-
-Officer::~Officer()
-{
-    delete[] commandedSoldiers;
 }
 
 int Officer::getCommandedCount() const
 {
-    return commandedCount;
-}
-
-Soldier* Officer::getCommandedSoldier(int index) const
-{
-    if (index < 0 || index >= commandedCount)
+    int count = 0;
+    for (LinkedList<Soldier*>::ConstIterator it = commandedSoldiers.begin();
+         it != commandedSoldiers.end(); ++it)
     {
-        return nullptr;
+        ++count;
     }
-    return commandedSoldiers[index];
+    return count;
 }
 
 bool Officer::addCommandedSoldier(Soldier* soldier)
 {
-    if (!soldier)
+    if (!soldier || soldier == this)
     {
         return false;
     }
-    for (int i = 0; i < commandedCount; ++i)
+    for (LinkedList<Soldier*>::ConstIterator it = commandedSoldiers.begin();
+         it != commandedSoldiers.end(); ++it)
     {
-        if (commandedSoldiers[i] == soldier)
+        if (*it == soldier)
         {
             return false;
         }
     }
-
-    if (commandedCount == commandedCapacity)
-    {
-        const int newCap = commandedCapacity * 2;
-        Soldier** larger = new Soldier*[newCap];
-        for (int i = 0; i < commandedCount; ++i)
-        {
-            larger[i] = commandedSoldiers[i];
-        }
-        delete[] commandedSoldiers;
-        commandedSoldiers = larger;
-        commandedCapacity = newCap;
-    }
-    commandedSoldiers[commandedCount++] = soldier;
+    commandedSoldiers.addToEnd(soldier);
     return true;
 }
 
-bool Officer::removeCommandedSoldier(const Soldier* soldier)
+bool Officer::removeCommandedSoldier(Soldier* soldier)
 {
     if (!soldier)
     {
         return false;
     }
-    for (int i = 0; i < commandedCount; ++i)
-    {
-        if (commandedSoldiers[i] == soldier)
-        {
-            for (int j = i; j < commandedCount - 1; ++j)
-            {
-                commandedSoldiers[j] = commandedSoldiers[j + 1];
-            }
-            --commandedCount;
-            return true;
-        }
-    }
-    return false;
+    return commandedSoldiers.remove(soldier);
 }
 
 void Officer::printCommandedSoldiers() const
 {
-    std::cout << "    Commanded soldiers (" << commandedCount << "):" << std::endl;
-    for (int i = 0; i < commandedCount; ++i)
+    std::cout << "    Commanded soldiers (" << getCommandedCount() << "):" << std::endl;
+    for (LinkedList<Soldier*>::ConstIterator it = commandedSoldiers.begin();
+         it != commandedSoldiers.end(); ++it)
     {
-        std::cout << "      - " << *commandedSoldiers[i] << std::endl;
+        std::cout << "      - " << **it << std::endl;
     }
 }
 
 void Officer::print() const
 {
     Soldier::print();
-    std::cout << "    -> Officer: commands " << commandedCount
+    std::cout << "    -> Officer: commands " << getCommandedCount()
               << " soldier(s)" << std::endl;
+    if (!commandedSoldiers.isEmpty())
+    {
+        printCommandedSoldiers();
+    }
 }

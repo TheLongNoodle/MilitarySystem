@@ -2,23 +2,23 @@
 #define TRUCK_H
 
 #include "Vehicle.h"
+#include <vector>
+
 class Equipment;
 
+// Part 3: the loaded-equipment array became a std::vector of non-owning
+// pointers, so the destructor and count/capacity fields were removed. The
+// deleted copy operations were removed as redundant - Vehicle already
+// forbids copying.
 class Truck : virtual public Vehicle
 {
 private:
-    Equipment** loadedEquipment;
-    int loadedCount;
-    int loadedCapacity;
+    std::vector<Equipment*> loadedEquipment;
 
     double maxWeightKG;
 
 public:
-    Truck(const char* vehicleNumber, double maxWeightKG);
-    ~Truck();
-
-    Truck(const Truck& other) = delete;
-    Truck& operator=(const Truck& other) = delete;
+    Truck(const std::string& vehicleNumber, double maxWeightKG);
 
     int getLoadedCount() const;
     Equipment* getLoadedEquipment(int index) const;

@@ -1,22 +1,26 @@
 #ifndef BASE_FACILITY_H
 #define BASE_FACILITY_H
 
+#include "VehicleFactory.h"
+#include <string>
+#include <vector>
+
 class Vehicle;
 class Warehouse;
 
+// Part 3: the vehicle/warehouse arrays became std::vector. The destructor
+// and the deleted copy operations REMAIN: the facility owns the Vehicle and
+// Warehouse objects behind its pointers. The three per-type add methods
+// (addJeep/addTruck/addArmoredTransport) were replaced by a single
+// addVehicle that delegates creation to VehicleFactory.
 class BaseFacility
 {
 private:
-    Vehicle**   vehicles;
-    int         vehicleCount;
-    int         vehicleCapacity;
-
-    Warehouse** warehouses;
-    int         warehouseCount;
-    int         warehouseCapacity;
+    std::vector<Vehicle*> vehicles;
+    std::vector<Warehouse*> warehouses;
 
 public:
-    BaseFacility();
+    BaseFacility() = default;
     ~BaseFacility();
 
     BaseFacility(const BaseFacility& other) = delete;
@@ -31,13 +35,13 @@ public:
     bool addVehicle(Vehicle* vehicle);
     bool addWarehouse(Warehouse* warehouse);
 
-    bool addJeep(const char* vehicleNumber, int maxPassengers);
-    bool addTruck(const char* vehicleNumber, double maxWeightKG);
-    bool addArmoredTransport(const char* vehicleNumber, int maxPassengers,
-                             double maxWeightKG);
+    bool addVehicle(VehicleFactory::eVehicleType type,
+                    const std::string& vehicleNumber,
+                    int maxPassengers,
+                    double maxWeightKG);
 
-    const Vehicle* findVehicle(const char* vehicleNumber) const;
-    const Warehouse* findWarehouse(const char* name) const;
+    const Vehicle* findVehicle(const std::string& vehicleNumber) const;
+    const Warehouse* findWarehouse(const std::string& name) const;
 
     void printVehicles() const;
     void printWarehouses() const;

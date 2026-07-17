@@ -1,38 +1,30 @@
 #include "Vehicle.h"
 #include "Soldier.h"
-#include "Utils.h"
 #include <stdexcept>
 
-Vehicle::Vehicle(const char* vehicleNumber) : vehicleNumber(nullptr), driver(nullptr)
+Vehicle::Vehicle(const std::string& vehicleNumber)
+    : vehicleNumber(vehicleNumber), driver(nullptr)
 {
     available = true;
     needsMaintenance = false;
 
-    if (!vehicleNumber || vehicleNumber[0] == '\0')
+    if (vehicleNumber.empty())
     {
         throw std::invalid_argument("Vehicle: vehicle number must not be empty");
     }
-    this->vehicleNumber = utils::dupString(vehicleNumber);
 }
 
-Vehicle::~Vehicle()
+bool Vehicle::setVehicleNumber(const std::string& vn)
 {
-    delete[] this->vehicleNumber;
-}
-
-bool Vehicle::setVehicleNumber(const char* vn)
-{
-    if (!vn || vn[0] == '\0')
+    if (vn.empty())
     {
         return false;
     }
-    char* tmp = utils::dupString(vn);
-    delete[] vehicleNumber;
-    vehicleNumber = tmp;
+    vehicleNumber = vn;
     return true;
 }
 
-const char* Vehicle::getVehicleNumber() const
+const std::string& Vehicle::getVehicleNumber() const
 {
     return vehicleNumber;
 }

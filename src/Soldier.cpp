@@ -1,6 +1,5 @@
 #include "Soldier.h"
 #include "Unit.h"
-#include "Utils.h"
 #include <iostream>
 #include <stdexcept>
 
@@ -17,7 +16,7 @@ static const char* rankName(Soldier::eRank r)
             return "CORPORAL";
         case Soldier::eRank::SERGEANT:
             return "SERGEANT";
-        case Soldier::eRank::LIEUTENANT: 
+        case Soldier::eRank::LIEUTENANT:
             return "LIEUTENANT";
         case Soldier::eRank::CAPTAIN:
             return "CAPTAIN";
@@ -27,39 +26,23 @@ static const char* rankName(Soldier::eRank r)
     return "?";
 }
 
-Soldier::Soldier(const char* name, const Date& birthDate, const char* role, eRank rank)
-    : name(nullptr), birthDate(birthDate), role(nullptr), rank(rank), unit(nullptr)
+Soldier::Soldier(const std::string& name, const Date& birthDate,
+                 const std::string& role, eRank rank)
+    : name(name), birthDate(birthDate), role(role), rank(rank), unit(nullptr)
 {
-    if (!name || name[0] == '\0')
+    if (name.empty())
     {
         throw std::invalid_argument("Soldier: name must not be empty");
     }
-    if (!role || role[0] == '\0')
+    if (role.empty())
     {
         throw std::invalid_argument("Soldier: role must not be empty");
-    }
-
-    this->name = utils::dupString(name);
-    try
-    {
-        this->role = utils::dupString(role);
-    }
-    catch (...)
-    {
-        delete[] this->name;
-        throw;
     }
     id = s_nextId++;
     personalNumber = s_nextPersonalNumber++;
 }
 
-Soldier::~Soldier()
-{
-    delete[] name;
-    delete[] role;
-}
-
-const char* Soldier::getName() const
+const std::string& Soldier::getName() const
 {
     return name;
 }
@@ -79,7 +62,7 @@ int Soldier::getPersonalNumber() const
     return personalNumber;
 }
 
-const char* Soldier::getRole() const
+const std::string& Soldier::getRole() const
 {
     return role;
 }
@@ -94,15 +77,13 @@ Unit* Soldier::getUnit() const
     return unit;
 }
 
-bool Soldier::setName(const char* n)
+bool Soldier::setName(const std::string& n)
 {
-    if (!n || n[0] == '\0')
+    if (n.empty())
     {
         return false;
     }
-    char* tmp = utils::dupString(n);
-    delete[] name;
-    name = tmp;
+    name = n;
     return true;
 }
 
@@ -116,15 +97,13 @@ bool Soldier::setBirthDate(const Date& bd)
     return true;
 }
 
-bool Soldier::setRole(const char* r)
+bool Soldier::setRole(const std::string& r)
 {
-    if (!r || r[0] == '\0')
+    if (r.empty())
     {
         return false;
     }
-    char* tmp = utils::dupString(r);
-    delete[] role;
-    role = tmp;
+    role = r;
     return true;
 }
 

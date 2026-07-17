@@ -32,21 +32,8 @@ static const char* difficultyName(TrainingMission::eDifficultyLevel d)
 	return "?";
 }
 
-static const char* missionStatusName(Mission::eMissionStatus s)
-{
-	switch (s)
-	{
-		case Mission::eMissionStatus::NOT_STARTED:
-			return "NOT_STARTED";
-		case Mission::eMissionStatus::IN_PROGRESS:
-			return "IN_PROGRESS";
-		case Mission::eMissionStatus::COMPLETED:
-			return "COMPLETED";
-	}
-	return "?";
-}
-
-TrainingMission::TrainingMission(const char* missionName, Unit& unit, eTrainingType type, eDifficultyLevel diff)
+TrainingMission::TrainingMission(const std::string& missionName, Unit& unit,
+                                 eTrainingType type, eDifficultyLevel diff)
 		: Mission(missionName, unit), trainingType(type), difficultyLevel(diff)
 {
 }
@@ -83,7 +70,7 @@ void TrainingMission::print() const
 		<< getMissionName() << "'"
 		<< " | type: " << trainingTypeName(trainingType)
 		<< " | difficulty: " << difficultyName(difficultyLevel)
-		<< " | status: " << missionStatusName(getStatus())
+		<< " | status: " << Mission::statusName(getStatus())
 		<< " | unit: " << getAssignedUnit().getUnitName()
 		<< std::endl;
 }

@@ -2,28 +2,21 @@
 #include "Equipment.h"
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 
-Truck::Truck(const char* vehicleNumber, double maxWeightKG)
-     : Vehicle(vehicleNumber), loadedEquipment(nullptr)
+Truck::Truck(const std::string& vehicleNumber, double maxWeightKG)
+     : Vehicle(vehicleNumber)
 {
-    loadedCount = 0;
     if (maxWeightKG <= 0.0)
     {
         throw std::invalid_argument("Truck: maxWeightKG must be positive");
     }
     this->maxWeightKG = maxWeightKG;
-    loadedCapacity = 8;
-    loadedEquipment = new Equipment*[loadedCapacity];
-}
-
-Truck::~Truck()
-{
-    delete[] loadedEquipment;
 }
 
 int Truck::getLoadedCount() const
 {
-    return loadedCount;
+    return (int)loadedEquipment.size();
 }
 
 double Truck::getMaxWeightKG() const
@@ -33,7 +26,7 @@ double Truck::getMaxWeightKG() const
 
 Equipment* Truck::getLoadedEquipment(int index) const
 {
-    if (index < 0 || index >= loadedCount)
+    if (index < 0 || index >= (int)loadedEquipment.size())
     {
         return nullptr;
     }
@@ -56,27 +49,12 @@ bool Truck::loadEquipment(Equipment* equipment)
     {
         return false;
     }
-    for (int i = 0; i < loadedCount; ++i)
+    if (std::find(loadedEquipment.begin(), loadedEquipment.end(), equipment)
+        != loadedEquipment.end())
     {
-        if (loadedEquipment[i] == equipment)
-        {
-            return false;
-        }
+        return false;
     }
-
-    if (loadedCount == loadedCapacity)
-    {
-        const int newCap = loadedCapacity * 2;
-        Equipment** larger = new Equipment*[newCap];
-        for (int i = 0; i < loadedCount; ++i)
-        {
-            larger[i] = loadedEquipment[i];
-        }
-        delete[] loadedEquipment;
-        loadedEquipment = larger;
-        loadedCapacity = newCap;
-    }
-    loadedEquipment[loadedCount++] = equipment;
+    loadedEquipment.push_back(equipment);
     return true;
 }
 
@@ -86,26 +64,20 @@ bool Truck::unloadEquipment(const Equipment* equipment)
     {
         return false;
     }
-    for (int i = 0; i < loadedCount; ++i)
+    auto it = std::find(loadedEquipment.begin(), loadedEquipment.end(), equipment);
+    if (it == loadedEquipment.end())
     {
-        if (loadedEquipment[i] == equipment)
-        {
-            for (int j = i; j < loadedCount - 1; ++j)
-            {
-                loadedEquipment[j] = loadedEquipment[j + 1];
-            }
-            --loadedCount;
-            return true;
-        }
+        return false;
     }
-    return false;
+    loadedEquipment.erase(it);
+    return true;
 }
 
 void Truck::print() const
 {
     std::cout << "  Truck [" << getVehicleNumber() << "]"
               << " maxKG=" << maxWeightKG
-              << ", carrying=" << loadedCount << " item(s)"
+              << ", carrying=" << loadedEquipment.size() << " item(s)"
               << ", " << (getAvailable() ? "available" : "unavailable")
               << (getNeedsMaintenance() ? " (needs maintenance)" : "")
               << std::endl;

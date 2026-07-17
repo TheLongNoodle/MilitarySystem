@@ -14,6 +14,7 @@
   Truck.cpp
   Unit.cpp
   Vehicle.cpp
+  VehicleFactory.cpp
   Warehouse.cpp
   Generating Code...
   MilitarySystem.vcxproj -> C:\Users\Dolev Telem\source\repos\MilitarySystem\x64\Debug\MilitarySystem.exe

@@ -28,11 +28,8 @@ private:
     eDifficultyLevel difficultyLevel;
 
 public:
-    TrainingMission(const char* missionName, Unit& assignedUnit,
+    TrainingMission(const std::string& missionName, Unit& assignedUnit,
                     eTrainingType trainingType, eDifficultyLevel difficultyLevel);
-
-    TrainingMission(const TrainingMission& other) = delete;
-    TrainingMission& operator=(const TrainingMission& other) = delete;
 
     eTrainingType getTrainingType() const;
     eDifficultyLevel getDifficultyLevel() const;

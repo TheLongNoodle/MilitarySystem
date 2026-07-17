@@ -1,70 +1,50 @@
 #include "Warehouse.h"
 #include "Equipment.h"
-#include "Utils.h"
 #include <iostream>
-#include <cstring>
 #include <stdexcept>
 
-Warehouse::Warehouse(const char* name) : name(nullptr), equipmentList(nullptr)
+Warehouse::Warehouse(const std::string& name) : name(name)
 {
-    count = 0;
-
-    if (!name || name[0] == '\0')
+    if (name.empty())
     {
         throw std::invalid_argument("Warehouse: name must not be empty");
-    }
-
-    this->name = utils::dupString(name);
-    try
-    {
-        capacity = 16;
-        equipmentList = new Equipment*[capacity];
-    }
-    catch (...)
-    {
-        delete[] this->name;
-        throw;
     }
 }
 
 Warehouse::~Warehouse()
 {
-    for (int i = 0; i < count; ++i)
+    for (Equipment* equipment : equipmentList)
     {
-        delete equipmentList[i];
+        delete equipment;
     }
-    delete[] equipmentList;
-    delete[] name;
 }
 
-const char* Warehouse::getName() const
+const std::string& Warehouse::getName() const
 {
     return name;
 }
 
 int Warehouse::getEquipmentCount() const
 {
-    return count;
+    return (int)equipmentList.size();
 }
 
 Equipment* Warehouse::getEquipment(int index) const
 {
-    if (index < 0 || index >= count)
+    if (index < 0 || index >= (int)equipmentList.size())
     {
         return nullptr;
     }
     return equipmentList[index];
 }
 
-bool Warehouse::setName(const char* n)
+bool Warehouse::setName(const std::string& n)
 {
-    if (!n || n[0] == '\0')
+    if (n.empty())
     {
         return false;
     }
-    char* tmp = utils::dupString(n);
-    delete[] name;
-    name = tmp;
+    name = n;
     return true;
 }
 
@@ -74,34 +54,17 @@ bool Warehouse::addEquipment(Equipment* equipment)
     {
         return false;
     }
-
-    if (count == capacity)
-    {
-        const int newCap = capacity * 2;
-        Equipment** larger = new Equipment*[newCap];
-        for (int i = 0; i < count; ++i)
-        {
-            larger[i] = equipmentList[i];
-        }
-        delete[] equipmentList;
-        equipmentList = larger;
-        capacity = newCap;
-    }
-    equipmentList[count++] = equipment;
+    equipmentList.push_back(equipment);
     return true;
 }
 
-Equipment* Warehouse::searchEquipment(const char* searchName) const
+Equipment* Warehouse::searchEquipment(const std::string& searchName) const
 {
-    if (!searchName)
+    for (Equipment* equipment : equipmentList)
     {
-        return nullptr;
-    }
-    for (int i = 0; i < count; ++i)
-    {
-        if (std::strcmp(equipmentList[i]->getName(), searchName) == 0)
+        if (equipment->getName() == searchName)
         {
-            return equipmentList[i];
+            return equipment;
         }
     }
     return nullptr;
@@ -110,16 +73,16 @@ Equipment* Warehouse::searchEquipment(const char* searchName) const
 void Warehouse::printEquipment() const
 {
     std::cout << "  Warehouse '" << name
-    << "' (" << count << " item(s)):" << std::endl;
-    for (int i = 0; i < count; ++i)
+    << "' (" << equipmentList.size() << " item(s)):" << std::endl;
+    for (const Equipment* equipment : equipmentList)
     {
-        equipmentList[i]->print();
+        equipment->print();
     }
 }
 
 const Equipment& Warehouse::operator[](int index) const
 {
-    if (index < 0 || index >= count)
+    if (index < 0 || index >= (int)equipmentList.size())
     {
         throw std::out_of_range("Warehouse::operator[]: index out of range");
     }

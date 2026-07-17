@@ -3,32 +3,11 @@
 #include "Equipment.h"
 #include "Unit.h"
 #include <iostream>
+#include <algorithm>
 
-static const char* logMissionStatusName(Mission::eMissionStatus s)
+LogisticsMission::LogisticsMission(const std::string& missionName, Unit& unit)
+    : Mission(missionName, unit), assignedVehicle(nullptr)
 {
-    switch (s)
-    {
-        case Mission::eMissionStatus::NOT_STARTED: 
-            return "NOT_STARTED";
-        case Mission::eMissionStatus::IN_PROGRESS:
-            return "IN_PROGRESS";
-        case Mission::eMissionStatus::COMPLETED:
-            return "COMPLETED";
-    }
-    return "?";
-}
-
-LogisticsMission::LogisticsMission(const char* missionName, Unit& unit)
-    : Mission(missionName, unit), assignedVehicle(nullptr), requiredEquipment(nullptr)
-{
-    requiredCount = 0;
-    requiredCapacity = 8;
-    requiredEquipment = new Equipment*[requiredCapacity];
-}
-
-LogisticsMission::~LogisticsMission()
-{
-    delete[] requiredEquipment;
 }
 
 Vehicle* LogisticsMission::getAssignedVehicle() const
@@ -38,12 +17,12 @@ Vehicle* LogisticsMission::getAssignedVehicle() const
 
 int LogisticsMission::getRequiredEquipmentCount() const
 {
-    return requiredCount;
+    return (int)requiredEquipment.size();
 }
 
 Equipment* LogisticsMission::getRequiredEquipment(int index) const
 {
-    if (index < 0 || index >= requiredCount)
+    if (index < 0 || index >= (int)requiredEquipment.size())
     {
         return nullptr;
     }
@@ -62,27 +41,12 @@ bool LogisticsMission::addEquipment(Equipment* equipment)
     {
         return false;
     }
-    for (int i = 0; i < requiredCount; ++i)
+    if (std::find(requiredEquipment.begin(), requiredEquipment.end(), equipment)
+        != requiredEquipment.end())
     {
-        if (requiredEquipment[i] == equipment)
-        {
-            return false;
-        }
+        return false;
     }
-
-    if (requiredCount == requiredCapacity)
-    {
-        const int newCap = requiredCapacity * 2;
-        Equipment** larger = new Equipment*[newCap];
-        for (int i = 0; i < requiredCount; ++i)
-        {
-            larger[i] = requiredEquipment[i];
-        }
-        delete[] requiredEquipment;
-        requiredEquipment = larger;
-        requiredCapacity = newCap;
-    }
-    requiredEquipment[requiredCount++] = equipment;
+    requiredEquipment.push_back(equipment);
     return true;
 }
 
@@ -92,35 +56,29 @@ bool LogisticsMission::removeEquipment(const Equipment* equipment)
     {
         return false;
     }
-    for (int i = 0; i < requiredCount; ++i)
+    auto it = std::find(requiredEquipment.begin(), requiredEquipment.end(), equipment);
+    if (it == requiredEquipment.end())
     {
-        if (requiredEquipment[i] == equipment)
-        {
-            for (int j = i; j < requiredCount - 1; ++j)
-            {
-                requiredEquipment[j] = requiredEquipment[j + 1];
-            }
-            --requiredCount;
-            return true;
-        }
+        return false;
     }
-    return false;
+    requiredEquipment.erase(it);
+    return true;
 }
 
 void LogisticsMission::print() const
 {
     std::cout << "  LogisticsMission [" << getMissionId() << "] '"
               << getMissionName() << "'"
-              << " | status: " << logMissionStatusName(getStatus())
+              << " | status: " << Mission::statusName(getStatus())
               << " | unit: "   << getAssignedUnit().getUnitName()
               << " | vehicle: "
               << (assignedVehicle ? assignedVehicle->getVehicleNumber() : "(none)")
-              << " | required equipment: " << requiredCount
+              << " | required equipment: " << requiredEquipment.size()
               << std::endl;
-    for (int i = 0; i < requiredCount; ++i)
+    for (const Equipment* equipment : requiredEquipment)
     {
-        std::cout << "      - " << requiredEquipment[i]->getName()
-                  << " (S/N " << requiredEquipment[i]->getSerialNumber() << ")"
+        std::cout << "      - " << equipment->getName()
+                  << " (S/N " << equipment->getSerialNumber() << ")"
                   << std::endl;
     }
 }

@@ -7,10 +7,8 @@
 class ArmoredTransport : public Jeep, public Truck
 {
 public:
-    ArmoredTransport(const char* vehicleNumber, int maxPassengers, double maxWeightKG);
-
-    ArmoredTransport(const ArmoredTransport& other) = delete;
-    ArmoredTransport& operator=(const ArmoredTransport& other) = delete;
+    ArmoredTransport(const std::string& vehicleNumber, int maxPassengers,
+                     double maxWeightKG);
 
     void print() const override;
 };

@@ -3,18 +3,33 @@
 #include "Soldier.h"
 #include "Equipment.h"
 #include "Mission.h"
+#include "MissionObserver.h"
 #include "TrainingMission.h"
 #include "LogisticsMission.h"
 #include "Vehicle.h"
+#include "VehicleFactory.h"
 #include "Report.h"
 
 #include <iostream>
+#include <string>
 #include <stdexcept>
 #include <limits>
 
 using namespace std;
 
-const int LINE_LEN = 256;
+// Observer pattern (part 3): concrete observer lives in the UI layer, so
+// the model classes stay free of presentation decisions. It is registered
+// once in main() and MilitarySystem attaches it to every mission it creates.
+class ConsoleMissionNotifier : public MissionObserver
+{
+public:
+    void onMissionStatusChanged(const Mission& mission) override
+    {
+        cout << "[NOTIFICATION] Mission '" << mission.getMissionName()
+             << "' (ID " << mission.getMissionId() << ") is now "
+             << Mission::statusName(mission.getStatus()) << "." << endl;
+    }
+};
 
 // Extraction failure (e.g. letters where a number is expected) leaves cin in
 // a fail state that silently breaks every read after it, so all numeric input
@@ -63,17 +78,24 @@ double readDouble(const char* prompt)
     return value;
 }
 
-void readPersonInput(const char* namePrompt, char (&name)[LINE_LEN],
-                     char (&role)[LINE_LEN], int& day, int& month,
+string readWord(const char* prompt)
+{
+    string value;
+    cout << prompt;
+    cin >> value;
+    return value;
+}
+
+void readPersonInput(const char* namePrompt, string& name,
+                     string& role, int& day, int& month,
                      int& year, int& rank)
 {
-    cout << namePrompt;
-    cin >> name;
+    name = readWord(namePrompt);
     cout << "Enter birth date:" << endl;
     day   = readInt("Day: ");
     month = readInt("Month: ");
     year  = readInt("Year: ");
-    cout << "Role: ";  cin >> role;
+    role = readWord("Role: ");
     rank = readIntInRange(
         "Rank (0=PRIVATE 1=CORPORAL 2=SERGEANT 3=LIEUTENANT 4=CAPTAIN 5=MAJOR): ",
         0, 5);
@@ -81,8 +103,7 @@ void readPersonInput(const char* namePrompt, char (&name)[LINE_LEN],
 
 void addSoldier(MilitarySystem& militarySystem)
 {
-    char name[LINE_LEN];
-    char role[LINE_LEN];
+    string name, role;
     int day, month, year, rank;
 
     readPersonInput("Soldier name: ", name, role, day, month, year, rank);
@@ -100,8 +121,7 @@ void addSoldier(MilitarySystem& militarySystem)
 
 void addOfficer(MilitarySystem& militarySystem)
 {
-    char name[LINE_LEN];
-    char role[LINE_LEN];
+    string name, role;
     int day, month, year, rank;
 
     readPersonInput("Officer name: ", name, role, day, month, year, rank);
@@ -119,9 +139,7 @@ void addOfficer(MilitarySystem& militarySystem)
 
 void createUnit(MilitarySystem& militarySystem)
 {
-    char unitName[LINE_LEN];
-    cout << "Unit name: ";
-    cin >> unitName;
+    string unitName = readWord("Unit name: ");
 
     if (militarySystem.addUnit(unitName))
     {
@@ -155,41 +173,61 @@ void transferSoldier(MilitarySystem& militarySystem)
     }
 }
 
+void assignSoldierToOfficer(MilitarySystem& militarySystem)
+{
+    int officerNumber = readInt("Officer personal number: ");
+    int soldierNumber = readInt("Soldier personal number: ");
+
+    if (militarySystem.assignSoldierToOfficer(officerNumber, soldierNumber))
+    {
+        cout << "Soldier assigned to officer's command." << endl;
+    }
+    else
+    {
+        cout << "Failed to assign soldier to officer." << endl;
+    }
+}
+
 void addVehicle(MilitarySystem& militarySystem)
 {
     int vehicleType = readIntInRange("Vehicle type (1=Jeep 2=Truck 3=ArmoredTransport): ", 1, 3);
 
-    char vehicleNumber[LINE_LEN];
-    cout << "Vehicle number: ";
-    cin >> vehicleNumber;
+    string vehicleNumber = readWord("Vehicle number: ");
 
-    bool success = false;
+    int maxPassengers = 0;
+    double maxWeightKG = 0.0;
+    VehicleFactory::eVehicleType type;
+
     if (vehicleType == 1)
     {
-        int maxPassengers = readInt("Max passengers: ");
-        success = militarySystem.addJeep(vehicleNumber, maxPassengers);
+        type = VehicleFactory::eVehicleType::JEEP;
+        maxPassengers = readInt("Max passengers: ");
     }
     else if (vehicleType == 2)
     {
-        double maxWeightKG = readDouble("Max weight (kg): ");
-        success = militarySystem.addTruck(vehicleNumber, maxWeightKG);
+        type = VehicleFactory::eVehicleType::TRUCK;
+        maxWeightKG = readDouble("Max weight (kg): ");
     }
     else
     {
-        int maxPassengers = readInt("Max passengers: ");
-        double maxWeightKG = readDouble("Max weight (kg): ");
-        success = militarySystem.addArmoredTransport(vehicleNumber, maxPassengers, maxWeightKG);
+        type = VehicleFactory::eVehicleType::ARMORED_TRANSPORT;
+        maxPassengers = readInt("Max passengers: ");
+        maxWeightKG = readDouble("Max weight (kg): ");
     }
 
-    if (success) cout << "Vehicle added." << endl;
-    else         cout << "Failed to add vehicle." << endl;
+    if (militarySystem.addVehicle(type, vehicleNumber, maxPassengers, maxWeightKG))
+    {
+        cout << "Vehicle added." << endl;
+    }
+    else
+    {
+        cout << "Failed to add vehicle." << endl;
+    }
 }
 
 void addWarehouse(MilitarySystem& militarySystem)
 {
-    char warehouseName[LINE_LEN];
-    cout << "Warehouse name: ";
-    cin >> warehouseName;
+    string warehouseName = readWord("Warehouse name: ");
 
     if (militarySystem.addWarehouse(warehouseName))
     {
@@ -210,13 +248,7 @@ void addEquipment(MilitarySystem& militarySystem)
         return;
     }
 
-    char warehouseName[LINE_LEN];
-    char equipmentName[LINE_LEN];
-    char serialNumber[LINE_LEN];
-    int quantity, equipmentStatus;
-
-    cout << "Warehouse name: ";
-    cin >> warehouseName;
+    string warehouseName = readWord("Warehouse name: ");
 
     if (!militarySystem.warehouseExists(warehouseName))
     {
@@ -224,12 +256,10 @@ void addEquipment(MilitarySystem& militarySystem)
         return;
     }
 
-    cout << "Equipment name: ";
-    cin >> equipmentName;
-    cout << "Serial number: ";
-    cin >> serialNumber;
-    quantity = readInt("Quantity: ");
-    equipmentStatus = readIntInRange("Status (0=WORKING 1=DAMAGED): ", 0, 1);
+    string equipmentName = readWord("Equipment name: ");
+    string serialNumber = readWord("Serial number: ");
+    int quantity = readInt("Quantity: ");
+    int equipmentStatus = readIntInRange("Status (0=WORKING 1=DAMAGED): ", 0, 1);
 
     if (militarySystem.addEquipment(warehouseName, equipmentName, serialNumber, quantity,
                                     (Equipment::eEquipmentStatus)equipmentStatus))
@@ -244,10 +274,7 @@ void addEquipment(MilitarySystem& militarySystem)
 
 void createTrainingMission(MilitarySystem& militarySystem)
 {
-    char name[LINE_LEN];
-
-    cout << "Mission name: ";
-    cin >> name;
+    string name = readWord("Mission name: ");
     int unitId = readInt("Assigned unit ID: ");
     int trainingType = readIntInRange(
         "Training type (0=FITNESS 1=DRIVING 2=TECHNICAL 3=COMMAND): ", 0, 3);
@@ -267,10 +294,7 @@ void createTrainingMission(MilitarySystem& militarySystem)
 
 void createLogisticsMission(MilitarySystem& militarySystem)
 {
-    char name[LINE_LEN];
-
-    cout << "Mission name: ";
-    cin >> name;
+    string name = readWord("Mission name: ");
 
     militarySystem.printAllUnits();
     if (militarySystem.getUnitsCount() == 0)
@@ -300,9 +324,7 @@ void createLogisticsMission(MilitarySystem& militarySystem)
         }
         else
         {
-            char vehicleNumber[LINE_LEN];
-            cout << "Vehicle number: ";
-            cin >> vehicleNumber;
+            string vehicleNumber = readWord("Vehicle number: ");
             if (militarySystem.setMissionVehicle(missionId, vehicleNumber))
             {
                 cout << "Vehicle assigned." << endl;
@@ -326,10 +348,7 @@ void createLogisticsMission(MilitarySystem& militarySystem)
             break;
         }
 
-        char warehouseName[LINE_LEN];
-        char equipmentName[LINE_LEN];
-        cout << "Warehouse name: ";
-        cin >> warehouseName;
+        string warehouseName = readWord("Warehouse name: ");
 
         if (!militarySystem.warehouseExists(warehouseName))
         {
@@ -337,8 +356,7 @@ void createLogisticsMission(MilitarySystem& militarySystem)
             continue;
         }
 
-        cout << "Equipment name: ";
-        cin >> equipmentName;
+        string equipmentName = readWord("Equipment name: ");
         if (militarySystem.addMissionEquipment(missionId, warehouseName, equipmentName))
         {
             cout << "Equipment added to mission." << endl;
@@ -380,9 +398,7 @@ void updateMissionStatus(MilitarySystem& militarySystem)
 
 void markVehicleMaintenance(MilitarySystem& militarySystem)
 {
-    char vehicleNumber[LINE_LEN];
-    cout << "Vehicle number: ";
-    cin >> vehicleNumber;
+    string vehicleNumber = readWord("Vehicle number: ");
 
     Vehicle* vehicle = militarySystem.findVehicle(vehicleNumber);
     if (!vehicle)
@@ -398,6 +414,91 @@ void markVehicleMaintenance(MilitarySystem& militarySystem)
     {
         cout << "Failed." << endl;
     }
+}
+
+// Fills the system with a demo scenario: soldiers, officers, units,
+// assignments, an officer's command, vehicles of all three types, a stocked
+// warehouse, one training and one logistics mission (with vehicle and
+// equipment), a driver and a status update that fires the observer.
+// Ids are auto-generated by the system, so they are derived from the current
+// counts (entities are never deleted, so the counters are predictable).
+// Names get a batch suffix so the option can be used more than once.
+void createMockData(MilitarySystem& militarySystem)
+{
+    static int s_mockBatch = 0;
+    ++s_mockBatch;
+    const string tag = "-M" + to_string(s_mockBatch);
+
+    const int pnBase = 100000 + militarySystem.generateReport().getSoldierCount();
+    const int unitBase = 100 + militarySystem.getUnitsCount();
+    const int missionBase = 1 + militarySystem.getMissionsCount();
+
+    cout << "Creating mock data (batch " << s_mockBatch << ")..." << endl;
+
+    // --- personnel: 4 soldiers (pnBase..+3) and 2 officers (+4, +5) ---
+    militarySystem.addSoldier("Avi" + tag,  Date(12, 3, 2001), "Rifleman", Soldier::eRank::PRIVATE);
+    militarySystem.addSoldier("Ben" + tag,  Date(30, 7, 2000), "Medic",    Soldier::eRank::CORPORAL);
+    militarySystem.addSoldier("Chen" + tag, Date(15, 1, 2002), "Driver",   Soldier::eRank::PRIVATE);
+    militarySystem.addSoldier("Dana" + tag, Date(9, 11, 1999), "Sniper",   Soldier::eRank::SERGEANT);
+    militarySystem.addOfficer("Gadi" + tag, Date(2, 6, 1993),  "Commander", Soldier::eRank::CAPTAIN);
+    militarySystem.addOfficer("Noa" + tag,  Date(21, 9, 1990), "OpsOfficer", Soldier::eRank::MAJOR);
+
+    // --- units and assignments ---
+    militarySystem.addUnit("Alpha" + tag);   // unitBase
+    militarySystem.addUnit("Bravo" + tag);   // unitBase + 1
+    militarySystem.assignSoldierToUnit(pnBase,     unitBase);      // Avi  -> Alpha
+    militarySystem.assignSoldierToUnit(pnBase + 1, unitBase);      // Ben  -> Alpha
+    militarySystem.assignSoldierToUnit(pnBase + 4, unitBase);      // Gadi -> Alpha
+    militarySystem.assignSoldierToUnit(pnBase + 2, unitBase + 1);  // Chen -> Bravo
+    militarySystem.assignSoldierToUnit(pnBase + 3, unitBase + 1);  // Dana -> Bravo
+
+    // --- officer command (linked list) ---
+    militarySystem.assignSoldierToOfficer(pnBase + 4, pnBase);      // Gadi commands Avi
+    militarySystem.assignSoldierToOfficer(pnBase + 4, pnBase + 1);  // Gadi commands Ben
+    militarySystem.assignSoldierToOfficer(pnBase + 5, pnBase + 2);  // Noa commands Chen
+
+    // --- vehicles via the factory ---
+    militarySystem.addVehicle(VehicleFactory::eVehicleType::JEEP,  "J" + tag, 4, 0.0);
+    militarySystem.addVehicle(VehicleFactory::eVehicleType::TRUCK, "T" + tag, 0, 500.0);
+    militarySystem.addVehicle(VehicleFactory::eVehicleType::ARMORED_TRANSPORT,
+                              "A" + tag, 8, 1200.0);
+    militarySystem.setVehicleDriver("J" + tag, pnBase + 2);         // Chen drives the jeep
+
+    // --- warehouse with equipment ---
+    militarySystem.addWarehouse("Depot" + tag);
+    militarySystem.addEquipment("Depot" + tag, "Radio", "SN-R" + tag, 5,
+                                Equipment::eEquipmentStatus::WORKING);
+    militarySystem.addEquipment("Depot" + tag, "Tent", "SN-T" + tag, 2,
+                                Equipment::eEquipmentStatus::WORKING);
+    militarySystem.addEquipment("Depot" + tag, "Generator", "SN-G" + tag, 1,
+                                Equipment::eEquipmentStatus::DAMAGED);
+
+    // --- missions ---
+    militarySystem.addTrainingMission("Drill" + tag, unitBase,       // missionBase
+                                      TrainingMission::eTrainingType::DRIVING,
+                                      TrainingMission::eDifficultyLevel::HARD);
+    int logisticsId = militarySystem.addLogisticsMission("Supply" + tag, unitBase + 1);
+    militarySystem.setMissionVehicle(logisticsId, "T" + tag);
+    militarySystem.addMissionEquipment(logisticsId, "Depot" + tag, "Radio");
+    militarySystem.addMissionEquipment(logisticsId, "Depot" + tag, "Tent");
+
+    // --- a status change so the observer notification is demonstrated ---
+    Mission* drill = militarySystem.findMission(missionBase);
+    if (drill)
+    {
+        drill->setStatus(Mission::eMissionStatus::IN_PROGRESS);
+    }
+
+    cout << "Mock data ready:" << endl;
+    cout << "  Soldiers " << pnBase << "-" << pnBase + 3
+         << ", officers " << pnBase + 4 << " (Gadi) and " << pnBase + 5 << " (Noa)" << endl;
+    cout << "  Units " << unitBase << " (Alpha" << tag << ") and "
+         << unitBase + 1 << " (Bravo" << tag << ")" << endl;
+    cout << "  Vehicles J" << tag << ", T" << tag << ", A" << tag
+         << " | warehouse Depot" << tag << endl;
+    cout << "  Missions " << missionBase << " (Drill" << tag << ", in progress) and "
+         << logisticsId << " (Supply" << tag << ")" << endl;
+    cout << "Use option 12 to see everything." << endl;
 }
 
 void printMenu()
@@ -417,12 +518,17 @@ void printMenu()
     cout << "11. Mark vehicle for maintenance" << endl;
     cout << "12. Print all data" << endl;
     cout << "13. Generate and print report" << endl;
+    cout << "14. Assign soldier to officer's command" << endl;
+    cout << "15. Create mock data (demo scenario)" << endl;
     cout << " 0. Exit" << endl;
 }
 
 int main()
 {
-    MilitarySystem militarySystem;
+    MilitarySystem& militarySystem = MilitarySystem::getInstance();
+
+    ConsoleMissionNotifier notifier;
+    militarySystem.setMissionObserver(&notifier);
 
     cout << "Welcome to the Military Base Management System." << endl;
     cout << "Note: names are single words (use MainDepot, not Main Depot)." << endl;
@@ -437,16 +543,16 @@ int main()
         {
             switch (choice)
             {
-                case 1:  
+                case 1:
                     addSoldier(militarySystem);
                     break;
-                case 2:  
+                case 2:
                     addOfficer(militarySystem);
                     break;
-                case 3:  
+                case 3:
                     createUnit(militarySystem);
                     break;
-                case 4:  
+                case 4:
                     transferSoldier(militarySystem);
                     break;
                 case 5:
@@ -458,7 +564,7 @@ int main()
                 case 7:
                     addEquipment(militarySystem);
                     break;
-                case 8:  
+                case 8:
                     createTrainingMission(militarySystem);
                     break;
                 case 9:
@@ -475,6 +581,12 @@ int main()
                     break;
                 case 13:
                     militarySystem.generateReport().print();
+                    break;
+                case 14:
+                    assignSoldierToOfficer(militarySystem);
+                    break;
+                case 15:
+                    createMockData(militarySystem);
                     break;
                 case 0:
                     cout << "Goodbye." << endl;

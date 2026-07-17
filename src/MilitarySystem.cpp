@@ -9,169 +9,125 @@
 #include "Mission.h"
 #include "TrainingMission.h"
 #include "LogisticsMission.h"
+#include "MissionObserver.h"
 #include "Report.h"
 #include <iostream>
 
-MilitarySystem::MilitarySystem() : soldiers(nullptr), units(nullptr), missions(nullptr), base()
+MilitarySystem& MilitarySystem::getInstance()
 {
-    soldiersCount = 0;
-    soldiersCapacity = 16;
-    unitsCount = 0;
-    unitsCapacity = 8;
-    missionsCount = 0;
-    missionsCapacity = 8;
+    // Meyers singleton: constructed on first use, destroyed automatically
+    // at program exit, no dynamic allocation needed.
+    static MilitarySystem instance;
+    return instance;
+}
 
-    soldiers = new Soldier*[soldiersCapacity];
-    try
-    {
-        units = new Unit*[unitsCapacity];
-        try
-        {
-            missions = new Mission*[missionsCapacity];
-        }
-        catch (...)
-        {
-            delete[] units;
-            throw;
-        }
-    }
-    catch (...)
-    {
-        delete[] soldiers;
-        throw;
-    }
+MilitarySystem::MilitarySystem() : missionObserver(nullptr)
+{
 }
 
 MilitarySystem::~MilitarySystem()
 {
-    for (int i = 0; i < missionsCount; ++i)
+    for (Mission* mission : missions)
     {
-        delete missions[i];
+        delete mission;
     }
-    delete[] missions;
-
-    for (int i = 0; i < unitsCount; ++i)
+    for (Unit* unit : units)
     {
-        delete units[i];
+        delete unit;
     }
-    delete[] units;
-
-    for (int i = 0; i < soldiersCount; ++i)
+    for (Soldier* soldier : soldiers)
     {
-        delete soldiers[i];
+        delete soldier;
     }
-    delete[] soldiers;
 }
 
-bool MilitarySystem::addSoldier(const char* name, const Date& birthDate,
-                                const char* role, Soldier::eRank rank)
+void MilitarySystem::setMissionObserver(MissionObserver* observer)
 {
-    if (!name || name[0] == '\0')
-    {
-        return false;
-    }
-    if (!role || role[0] == '\0')
-    {
-        return false;
-    }
-    if (!birthDate.isValid())
-    {
-        return false;
-    }
+    missionObserver = observer;
+}
 
-    Soldier* s = new Soldier(name, birthDate, role, rank);
-    if (soldiersCount == soldiersCapacity)
+bool MilitarySystem::isValidPersonInput(const std::string& name,
+                                        const Date& birthDate,
+                                        const std::string& role)
+{
+    return !name.empty() && !role.empty() && birthDate.isValid();
+}
+
+bool MilitarySystem::addSoldier(const std::string& name, const Date& birthDate,
+                                const std::string& role, Soldier::eRank rank)
+{
+    if (!isValidPersonInput(name, birthDate, role))
     {
-        const int newCap = soldiersCapacity * 2;
-        Soldier** larger = new Soldier*[newCap];
-        for (int i = 0; i < soldiersCount; ++i)
-        {
-            larger[i] = soldiers[i];
-        }
-        delete[] soldiers;
-        soldiers = larger;
-        soldiersCapacity = newCap;
+        return false;
     }
-    soldiers[soldiersCount++] = s;
+    soldiers.push_back(new Soldier(name, birthDate, role, rank));
     return true;
 }
 
-bool MilitarySystem::addOfficer(const char* name, const Date& birthDate,
-                                const char* role, Soldier::eRank rank)
+bool MilitarySystem::addOfficer(const std::string& name, const Date& birthDate,
+                                const std::string& role, Soldier::eRank rank)
 {
-    if (!name || name[0] == '\0')
+    if (!isValidPersonInput(name, birthDate, role))
     {
         return false;
     }
-    if (!role || role[0] == '\0')
-    {
-        return false;
-    }
-    if (!birthDate.isValid())
-    {
-        return false;
-    }
-
-    Officer* o = new Officer(name, birthDate, role, rank);
-    if (soldiersCount == soldiersCapacity)
-    {
-        const int newCap = soldiersCapacity * 2;
-        Soldier** larger = new Soldier*[newCap];
-        for (int i = 0; i < soldiersCount; ++i)
-        {
-            larger[i] = soldiers[i];
-        }
-        delete[] soldiers;
-        soldiers = larger;
-        soldiersCapacity = newCap;
-    }
-    soldiers[soldiersCount++] = o;
+    soldiers.push_back(new Officer(name, birthDate, role, rank));
     return true;
 }
 
-const Soldier* MilitarySystem::findSoldier(int personalNumber) const
+Soldier* MilitarySystem::findSoldierMutable(int personalNumber)
 {
-    for (int i = 0; i < soldiersCount; ++i)
+    for (Soldier* soldier : soldiers)
     {
-        if (soldiers[i]->getPersonalNumber() == personalNumber)
+        if (soldier->getPersonalNumber() == personalNumber)
         {
-            return soldiers[i];
+            return soldier;
         }
     }
     return nullptr;
 }
 
-bool MilitarySystem::addUnit(const char* unitName)
+const Soldier* MilitarySystem::findSoldier(int personalNumber) const
 {
-    if (!unitName || unitName[0] == '\0')
+    for (const Soldier* soldier : soldiers)
+    {
+        if (soldier->getPersonalNumber() == personalNumber)
+        {
+            return soldier;
+        }
+    }
+    return nullptr;
+}
+
+bool MilitarySystem::addUnit(const std::string& unitName)
+{
+    if (unitName.empty())
     {
         return false;
     }
-
-    Unit* u = new Unit(unitName);
-    if (unitsCount == unitsCapacity)
-    {
-        const int newCap = unitsCapacity * 2;
-        Unit** larger = new Unit*[newCap];
-        for (int i = 0; i < unitsCount; ++i)
-        {
-            larger[i] = units[i];
-        }
-        delete[] units;
-        units = larger;
-        unitsCapacity = newCap;
-    }
-    units[unitsCount++] = u;
+    units.push_back(new Unit(unitName));
     return true;
+}
+
+Unit* MilitarySystem::findUnitMutable(int unitId)
+{
+    for (Unit* unit : units)
+    {
+        if (unit->getUnitId() == unitId)
+        {
+            return unit;
+        }
+    }
+    return nullptr;
 }
 
 const Unit* MilitarySystem::findUnit(int unitId) const
 {
-    for (int i = 0; i < unitsCount; ++i)
+    for (const Unit* unit : units)
     {
-        if (units[i]->getUnitId() == unitId)
+        if (unit->getUnitId() == unitId)
         {
-            return units[i];
+            return unit;
         }
     }
     return nullptr;
@@ -179,12 +135,12 @@ const Unit* MilitarySystem::findUnit(int unitId) const
 
 bool MilitarySystem::assignSoldierToUnit(int personalNumber, int unitId)
 {
-    Soldier* soldier = const_cast<Soldier*>(findSoldier(personalNumber));
+    Soldier* soldier = findSoldierMutable(personalNumber);
     if (!soldier)
     {
         return false;
     }
-    Unit* unit = const_cast<Unit*>(findUnit(unitId));
+    Unit* unit = findUnitMutable(unitId);
     if (!unit)
     {
         return false;
@@ -205,12 +161,12 @@ bool MilitarySystem::assignSoldierToUnit(int personalNumber, int unitId)
 
 bool MilitarySystem::transferSoldier(int personalNumber, int newUnitId)
 {
-    Soldier* soldier = const_cast<Soldier*>(findSoldier(personalNumber));
+    Soldier* soldier = findSoldierMutable(personalNumber);
     if (!soldier)
     {
         return false;
     }
-    Unit* newUnit = const_cast<Unit*>(findUnit(newUnitId));
+    Unit* newUnit = findUnitMutable(newUnitId);
     if (!newUnit)
     {
         return false;
@@ -221,22 +177,42 @@ bool MilitarySystem::transferSoldier(int personalNumber, int newUnitId)
     {
         return false;
     }
-    if (oldUnit) oldUnit->removeSoldier(soldier);
+    if (oldUnit)
+    {
+        oldUnit->removeSoldier(soldier);
+    }
 
     if (!newUnit->addSoldier(soldier))
     {
-        if (oldUnit) oldUnit->addSoldier(soldier);
+        if (oldUnit)
         {
-            return false;
+            oldUnit->addSoldier(soldier);
         }
+        return false;
     }
     soldier->setUnit(newUnit);
     return true;
 }
 
-bool MilitarySystem::addWarehouse(const char* name)
+bool MilitarySystem::assignSoldierToOfficer(int officerPersonalNumber,
+                                            int soldierPersonalNumber)
 {
-    if (!name || name[0] == '\0')
+    Officer* officer = dynamic_cast<Officer*>(findSoldierMutable(officerPersonalNumber));
+    if (!officer)
+    {
+        return false;
+    }
+    Soldier* soldier = findSoldierMutable(soldierPersonalNumber);
+    if (!soldier)
+    {
+        return false;
+    }
+    return officer->addCommandedSoldier(soldier);
+}
+
+bool MilitarySystem::addWarehouse(const std::string& name)
+{
+    if (name.empty())
     {
         return false;
     }
@@ -253,21 +229,37 @@ bool MilitarySystem::addWarehouse(const char* name)
     return true;
 }
 
-const Warehouse* MilitarySystem::findWarehouse(const char* name) const
+const Warehouse* MilitarySystem::findWarehouse(const std::string& name) const
 {
     return base.findWarehouse(name);
 }
 
-bool MilitarySystem::warehouseExists(const char* name) const
+Warehouse* MilitarySystem::findWarehouseMutable(const std::string& name)
+{
+    for (int i = 0; i < base.getWarehouseCount(); ++i)
+    {
+        const Warehouse* warehouse = base.getWarehouse(i);
+        if (warehouse->getName() == name)
+        {
+            // The facility getter is const-only; the system owns the base,
+            // so editing the found warehouse is legitimate here.
+            return const_cast<Warehouse*>(warehouse);
+        }
+    }
+    return nullptr;
+}
+
+bool MilitarySystem::warehouseExists(const std::string& name) const
 {
     return base.findWarehouse(name) != nullptr;
 }
 
-bool MilitarySystem::addEquipment(const char* warehouseName, const char* equipmentName,
-                                  const char* serialNumber, int quantity,
+bool MilitarySystem::addEquipment(const std::string& warehouseName,
+                                  const std::string& equipmentName,
+                                  const std::string& serialNumber, int quantity,
                                   Equipment::eEquipmentStatus status)
 {
-    Warehouse* w = const_cast<Warehouse*>(base.findWarehouse(warehouseName));
+    Warehouse* w = findWarehouseMutable(warehouseName);
     if (!w)
     {
         return false;
@@ -282,20 +274,11 @@ bool MilitarySystem::addEquipment(const char* warehouseName, const char* equipme
     return true;
 }
 
-bool MilitarySystem::addJeep(const char* vehicleNumber, int maxPassengers)
+bool MilitarySystem::addVehicle(VehicleFactory::eVehicleType type,
+                                const std::string& vehicleNumber,
+                                int maxPassengers, double maxWeightKG)
 {
-    return base.addJeep(vehicleNumber, maxPassengers);
-}
-
-bool MilitarySystem::addTruck(const char* vehicleNumber, double maxWeightKG)
-{
-    return base.addTruck(vehicleNumber, maxWeightKG);
-}
-
-bool MilitarySystem::addArmoredTransport(const char* vehicleNumber,
-                                         int maxPassengers, double maxWeightKG)
-{
-    return base.addArmoredTransport(vehicleNumber, maxPassengers, maxWeightKG);
+    return base.addVehicle(type, vehicleNumber, maxPassengers, maxWeightKG);
 }
 
 void MilitarySystem::printAllVehicles()   const
@@ -308,19 +291,22 @@ void MilitarySystem::printAllWarehouses() const
     base.printWarehouses();
 }
 
-Vehicle* MilitarySystem::findVehicle(const char* vehicleNumber) const
+Vehicle* MilitarySystem::findVehicle(const std::string& vehicleNumber) const
 {
+    // The facility getter is const-only; the system owns the base, so
+    // handing a mutable vehicle to callers (driver/maintenance updates)
+    // is legitimate here.
     return const_cast<Vehicle*>(base.findVehicle(vehicleNumber));
 }
 
-bool MilitarySystem::setVehicleDriver(const char* vehicleNumber, int personalNumber)
+bool MilitarySystem::setVehicleDriver(const std::string& vehicleNumber, int personalNumber)
 {
     Vehicle* v = findVehicle(vehicleNumber);
     if (!v)
     {
         return false;
     }
-    Soldier* s = const_cast<Soldier*>(findSoldier(personalNumber));
+    Soldier* s = findSoldierMutable(personalNumber);
     if (!s)
     {
         return false;
@@ -328,81 +314,62 @@ bool MilitarySystem::setVehicleDriver(const char* vehicleNumber, int personalNum
     return v->setDriver(s);
 }
 
-bool MilitarySystem::addTrainingMission(const char* missionName, int unitId,
-                                        TrainingMission::eTrainingType trainingType,
-                                        TrainingMission::eDifficultyLevel difficultyLevel)
+bool MilitarySystem::storeMission(Mission* mission)
 {
-    if (!missionName || missionName[0] == '\0')
+    if (missionObserver)
     {
-        return false;
+        mission->attach(missionObserver);
     }
-    Unit* unit = const_cast<Unit*>(findUnit(unitId));
-    if (!unit)
-    {
-        return false;
-    }
-
-    TrainingMission* m = new TrainingMission(missionName, *unit, trainingType, difficultyLevel);
-
-    if (missionsCount == missionsCapacity)
-    {
-        const int newCap = missionsCapacity * 2;
-        Mission** larger = new Mission*[newCap];
-        for (int i = 0; i < missionsCount; ++i)
-        {
-            larger[i] = missions[i];
-        }
-        delete[] missions;
-        missions = larger;
-        missionsCapacity = newCap;
-    }
-    missions[missionsCount++] = m;
+    missions.push_back(mission);
     return true;
 }
 
-int MilitarySystem::addLogisticsMission(const char* missionName, int unitId)
+bool MilitarySystem::addTrainingMission(const std::string& missionName, int unitId,
+                                        TrainingMission::eTrainingType trainingType,
+                                        TrainingMission::eDifficultyLevel difficultyLevel)
 {
-    if (!missionName || missionName[0] == '\0')
+    if (missionName.empty())
+    {
+        return false;
+    }
+    Unit* unit = findUnitMutable(unitId);
+    if (!unit)
+    {
+        return false;
+    }
+    return storeMission(new TrainingMission(missionName, *unit,
+                                            trainingType, difficultyLevel));
+}
+
+int MilitarySystem::addLogisticsMission(const std::string& missionName, int unitId)
+{
+    if (missionName.empty())
     {
         return -1;
     }
-    Unit* unit = const_cast<Unit*>(findUnit(unitId));
+    Unit* unit = findUnitMutable(unitId);
     if (!unit)
     {
         return -1;
     }
-
     LogisticsMission* m = new LogisticsMission(missionName, *unit);
-
-    if (missionsCount == missionsCapacity)
-    {
-        const int newCap = missionsCapacity * 2;
-        Mission** larger = new Mission*[newCap];
-        for (int i = 0; i < missionsCount; ++i)
-        {
-            larger[i] = missions[i];
-        }
-        delete[] missions;
-        missions = larger;
-        missionsCapacity = newCap;
-    }
-    missions[missionsCount++] = m;
+    storeMission(m);
     return m->getMissionId();
 }
 
 Mission* MilitarySystem::findMission(int missionId) const
 {
-    for (int i = 0; i < missionsCount; ++i)
+    for (Mission* mission : missions)
     {
-        if (missions[i]->getMissionId() == missionId)
+        if (mission->getMissionId() == missionId)
         {
-            return missions[i];
+            return mission;
         }
     }
     return nullptr;
 }
 
-bool MilitarySystem::setMissionVehicle(int missionId, const char* vehicleNumber)
+bool MilitarySystem::setMissionVehicle(int missionId, const std::string& vehicleNumber)
 {
     Mission* m = findMission(missionId);
     if (!m)
@@ -422,8 +389,8 @@ bool MilitarySystem::setMissionVehicle(int missionId, const char* vehicleNumber)
     return lm->setAssignedVehicle(v);
 }
 
-bool MilitarySystem::addMissionEquipment(int missionId, const char* warehouseName,
-                                         const char* equipmentName)
+bool MilitarySystem::addMissionEquipment(int missionId, const std::string& warehouseName,
+                                         const std::string& equipmentName)
 {
     Mission* m = findMission(missionId);
     if (!m)
@@ -436,7 +403,7 @@ bool MilitarySystem::addMissionEquipment(int missionId, const char* warehouseNam
         return false;
     }
 
-    Warehouse* w = const_cast<Warehouse*>(base.findWarehouse(warehouseName));
+    Warehouse* w = findWarehouseMutable(warehouseName);
     if (!w)
     {
         return false;
@@ -461,29 +428,29 @@ const BaseFacility& MilitarySystem::getBase() const
 
 int MilitarySystem::getUnitsCount() const
 {
-    return unitsCount;
+    return (int)units.size();
 }
 
 int MilitarySystem::getMissionsCount() const
 {
-    return missionsCount;
+    return (int)missions.size();
 }
 
 void MilitarySystem::printAllUnits() const
 {
-    std::cout << "--- Units (" << unitsCount << ") ---" << std::endl;
-    for (int i = 0; i < unitsCount; ++i)
+    std::cout << "--- Units (" << units.size() << ") ---" << std::endl;
+    for (const Unit* unit : units)
     {
-        units[i]->printSoldiers();
+        unit->printSoldiers();
     }
 }
 
 void MilitarySystem::printAllMissions() const
 {
-    std::cout << "--- Missions (" << missionsCount << ") ---" << std::endl;
-    for (int i = 0; i < missionsCount; ++i)
+    std::cout << "--- Missions (" << missions.size() << ") ---" << std::endl;
+    for (const Mission* mission : missions)
     {
-        missions[i]->print();
+        mission->print();
     }
 }
 
@@ -495,24 +462,24 @@ Report MilitarySystem::generateReport() const
         equipmentCount += base.getWarehouse(i)->getEquipmentCount();
     }
     int activeMissions = 0;
-    for (int i = 0; i < missionsCount; ++i)
+    for (const Mission* mission : missions)
     {
-        if (missions[i]->getStatus() != Mission::eMissionStatus::COMPLETED)
+        if (mission->getStatus() != Mission::eMissionStatus::COMPLETED)
         {
             ++activeMissions;
         }
     }
-    return Report(soldiersCount, unitsCount, base.getVehicleCount(),
+    return Report((int)soldiers.size(), (int)units.size(), base.getVehicleCount(),
                   equipmentCount, activeMissions);
 }
 
 void MilitarySystem::printAllData() const
 {
     std::cout << "===== Military Base Snapshot =====" << std::endl;
-    std::cout << "--- Personnel ("  << soldiersCount << ") ---" << std::endl;
-    for (int i = 0; i < soldiersCount; ++i)
+    std::cout << "--- Personnel ("  << soldiers.size() << ") ---" << std::endl;
+    for (const Soldier* soldier : soldiers)
     {
-        soldiers[i]->print();
+        soldier->print();
     }
     printAllUnits();
     printAllVehicles();

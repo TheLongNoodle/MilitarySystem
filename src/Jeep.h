@@ -2,23 +2,23 @@
 #define JEEP_H
 
 #include "Vehicle.h"
+#include <vector>
 
 class Soldier;
 
+// Part 3: the passengers array became a std::vector of non-owning pointers,
+// so the destructor was removed. maxPassengers is a domain rule (seating
+// capacity), not container bookkeeping, so it remains a field. The deleted
+// copy operations were removed as redundant - Vehicle already forbids copying.
 class Jeep : virtual public Vehicle
 {
 private:
-    Soldier** passengers;
-    int passengerCount;
+    std::vector<Soldier*> passengers;
 
     int maxPassengers;
 
 public:
-    Jeep(const char* vehicleNumber, int maxPassengers);
-    ~Jeep();
-
-    Jeep(const Jeep& other) = delete;
-    Jeep& operator=(const Jeep& other) = delete;
+    Jeep(const std::string& vehicleNumber, int maxPassengers);
 
     int getMaxPassengers() const;
     int getPassengerCount() const;

@@ -2,22 +2,16 @@
 #include "Soldier.h"
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 
-Jeep::Jeep(const char* vehicleNumber, int maxPassengers)
-    : Vehicle(vehicleNumber), passengers(nullptr)
+Jeep::Jeep(const std::string& vehicleNumber, int maxPassengers)
+    : Vehicle(vehicleNumber)
 {
-    passengerCount = 0;
     if (maxPassengers < 1)
     {
         throw std::invalid_argument("Jeep: maxPassengers must be >= 1");
     }
     this->maxPassengers = maxPassengers;
-    passengers = new Soldier*[maxPassengers];
-}
-
-Jeep::~Jeep()
-{
-    delete[] passengers;
 }
 
 int Jeep::getMaxPassengers()  const
@@ -26,12 +20,12 @@ int Jeep::getMaxPassengers()  const
 }
 int Jeep::getPassengerCount() const
 {
-    return passengerCount;
+    return (int)passengers.size();
 }
 
 Soldier* Jeep::getPassenger(int index) const
 {
-    if (index < 0 || index >= passengerCount)
+    if (index < 0 || index >= (int)passengers.size())
     {
         return nullptr;
     }
@@ -40,21 +34,10 @@ Soldier* Jeep::getPassenger(int index) const
 
 bool Jeep::setMaxPassengers(int n)
 {
-    if (n < passengerCount)
+    if (n < (int)passengers.size() || n < 1)
     {
         return false;
     }
-    if (n < 1)
-    {
-        return false;
-    }
-    Soldier** larger = new Soldier*[n];
-    for (int i = 0; i < passengerCount; ++i)
-    {
-        larger[i] = passengers[i];
-    }
-    delete[] passengers;
-    passengers = larger;
     maxPassengers = n;
     return true;
 }
@@ -65,18 +48,15 @@ bool Jeep::loadPassenger(Soldier* soldier)
     {
         return false;
     }
-    if (passengerCount >= maxPassengers)
+    if ((int)passengers.size() >= maxPassengers)
     {
         return false;
     }
-    for (int i = 0; i < passengerCount; ++i)
+    if (std::find(passengers.begin(), passengers.end(), soldier) != passengers.end())
     {
-        if (passengers[i] == soldier)
-        {
-            return false;
-        }
+        return false;
     }
-    passengers[passengerCount++] = soldier;
+    passengers.push_back(soldier);
     return true;
 }
 
@@ -86,25 +66,19 @@ bool Jeep::unloadPassenger(const Soldier* soldier)
     {
         return false;
     }
-    for (int i = 0; i < passengerCount; ++i)
+    auto it = std::find(passengers.begin(), passengers.end(), soldier);
+    if (it == passengers.end())
     {
-        if (passengers[i] == soldier)
-        {
-            for (int j = i; j < passengerCount - 1; ++j)
-            {
-                passengers[j] = passengers[j + 1];
-            }
-            --passengerCount;
-            return true;
-        }
+        return false;
     }
-    return false;
+    passengers.erase(it);
+    return true;
 }
 
 void Jeep::print() const
 {
     std::cout << "  Jeep [" << getVehicleNumber() << "]"
-              << " passengers=" << passengerCount << '/' << maxPassengers
+              << " passengers=" << passengers.size() << '/' << maxPassengers
               << ", " << (getAvailable() ? "available" : "unavailable")
               << (getNeedsMaintenance() ? " (needs maintenance)" : "")
               << std::endl;
