@@ -45,8 +45,6 @@ void MilitarySystem::setMissionObserver(MissionObserver* observer)
     missionObserver = observer;
 }
 
-// Enlistment window: nobody serving was born before EARLIEST or after LATEST.
-// Comparing Date objects directly is what Date::operator< is for.
 static const Date EARLIEST_BIRTH_DATE(1, 1, 1940);
 static const Date LATEST_BIRTH_DATE(1, 1, 2010);
 
@@ -61,8 +59,6 @@ bool MilitarySystem::isValidPersonInput(const std::string& name,
     return EARLIEST_BIRTH_DATE < birthDate && birthDate < LATEST_BIRTH_DATE;
 }
 
-// Two people with the same name and the same birth date are treated as the
-// same person; Date::operator== expresses that comparison.
 bool MilitarySystem::personExists(const std::string& name,
                                   const Date& birthDate) const
 {
@@ -181,9 +177,6 @@ bool MilitarySystem::assignSoldierToUnit(int personalNumber, int unitId)
         return false;
     }
 
-    // A soldier with no unit cannot already be a member, so the duplicate
-    // check inside addSoldier cannot fail here - use the += operator, which
-    // reads as "this unit gains this soldier".
     *unit += soldier;
     soldier->setUnit(unit);
 

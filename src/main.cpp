@@ -40,6 +40,10 @@ int readInt(const char* prompt)
     cout << prompt;
     while (!(cin >> value))
     {
+        if (cin.eof())                      
+        {
+            throw runtime_error("Unexpected end of input");
+        }
         discardBadInput();
         cout << "Invalid input, please enter a number." << endl;
         cout << prompt;
@@ -65,6 +69,10 @@ double readDouble(const char* prompt)
     cout << prompt;
     while (!(cin >> value))
     {
+        if (cin.eof())
+        {
+            throw runtime_error("Unexpected end of input");
+        }
         discardBadInput();
         cout << "Invalid input, please enter a number." << endl;
         cout << prompt;
