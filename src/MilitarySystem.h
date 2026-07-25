@@ -6,10 +6,10 @@
 #include "Equipment.h"
 #include "TrainingMission.h"
 #include "Report.h"
+#include "Date.h"
 #include <string>
 #include <vector>
 
-class Date;
 class Unit;
 class Vehicle;
 class Warehouse;
@@ -38,6 +38,8 @@ private:
     static bool isValidPersonInput(const std::string& name,
                                    const Date& birthDate,
                                    const std::string& role);
+
+    bool personExists(const std::string& name, const Date& birthDate) const;
 
 public:
     static MilitarySystem& getInstance();

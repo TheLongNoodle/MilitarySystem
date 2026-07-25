@@ -20,12 +20,12 @@ int Jeep::getMaxPassengers()  const
 }
 int Jeep::getPassengerCount() const
 {
-    return (int)passengers.size();
+    return static_cast<int>(passengers.size());
 }
 
 Soldier* Jeep::getPassenger(int index) const
 {
-    if (index < 0 || index >= (int)passengers.size())
+    if (index < 0 || index >= static_cast<int>(passengers.size()))
     {
         return nullptr;
     }
@@ -34,7 +34,7 @@ Soldier* Jeep::getPassenger(int index) const
 
 bool Jeep::setMaxPassengers(int n)
 {
-    if (n < (int)passengers.size() || n < 1)
+    if (n < static_cast<int>(passengers.size()) || n < 1)
     {
         return false;
     }
@@ -48,7 +48,7 @@ bool Jeep::loadPassenger(Soldier* soldier)
     {
         return false;
     }
-    if ((int)passengers.size() >= maxPassengers)
+    if (static_cast<int>(passengers.size()) >= maxPassengers)
     {
         return false;
     }

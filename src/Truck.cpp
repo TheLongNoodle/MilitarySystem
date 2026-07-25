@@ -16,7 +16,7 @@ Truck::Truck(const std::string& vehicleNumber, double maxWeightKG)
 
 int Truck::getLoadedCount() const
 {
-    return (int)loadedEquipment.size();
+    return static_cast<int>(loadedEquipment.size());
 }
 
 double Truck::getMaxWeightKG() const
@@ -26,7 +26,7 @@ double Truck::getMaxWeightKG() const
 
 Equipment* Truck::getLoadedEquipment(int index) const
 {
-    if (index < 0 || index >= (int)loadedEquipment.size())
+    if (index < 0 || index >= static_cast<int>(loadedEquipment.size()))
     {
         return nullptr;
     }

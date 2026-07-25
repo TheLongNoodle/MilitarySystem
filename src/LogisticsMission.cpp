@@ -17,12 +17,12 @@ Vehicle* LogisticsMission::getAssignedVehicle() const
 
 int LogisticsMission::getRequiredEquipmentCount() const
 {
-    return (int)requiredEquipment.size();
+    return static_cast<int>(requiredEquipment.size());
 }
 
 Equipment* LogisticsMission::getRequiredEquipment(int index) const
 {
-    if (index < 0 || index >= (int)requiredEquipment.size())
+    if (index < 0 || index >= static_cast<int>(requiredEquipment.size()))
     {
         return nullptr;
     }

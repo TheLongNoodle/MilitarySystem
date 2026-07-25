@@ -8,11 +8,6 @@
 class Vehicle;
 class Warehouse;
 
-// Part 3: the vehicle/warehouse arrays became std::vector. The destructor
-// and the deleted copy operations REMAIN: the facility owns the Vehicle and
-// Warehouse objects behind its pointers. The three per-type add methods
-// (addJeep/addTruck/addArmoredTransport) were replaced by a single
-// addVehicle that delegates creation to VehicleFactory.
 class BaseFacility
 {
 private:

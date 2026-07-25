@@ -103,7 +103,7 @@ void addSoldier(MilitarySystem& militarySystem)
     readPersonInput("Soldier name: ", name, role, day, month, year, rank);
 
     if (militarySystem.addSoldier(name, Date(day, month, year), role,
-                                  (Soldier::eRank)rank))
+                                  static_cast<Soldier::eRank>(rank)))
     {
         cout << "Soldier added." << endl;
     }
@@ -121,7 +121,7 @@ void addOfficer(MilitarySystem& militarySystem)
     readPersonInput("Officer name: ", name, role, day, month, year, rank);
 
     if (militarySystem.addOfficer(name, Date(day, month, year), role,
-                                  (Soldier::eRank)rank))
+                                  static_cast<Soldier::eRank>(rank)))
     {
         cout << "Officer added." << endl;
     }
@@ -256,7 +256,7 @@ void addEquipment(MilitarySystem& militarySystem)
     int equipmentStatus = readIntInRange("Status (0=WORKING 1=DAMAGED): ", 0, 1);
 
     if (militarySystem.addEquipment(warehouseName, equipmentName, serialNumber, quantity,
-                                    (Equipment::eEquipmentStatus)equipmentStatus))
+                                    static_cast<Equipment::eEquipmentStatus>(equipmentStatus)))
     {
         cout << "Equipment added." << endl;
     }
@@ -275,8 +275,8 @@ void createTrainingMission(MilitarySystem& militarySystem)
     int difficultyLevel = readIntInRange("Difficulty (0=EASY 1=MEDIUM 2=HARD): ", 0, 2);
 
     if (militarySystem.addTrainingMission(name, unitId,
-                                          (TrainingMission::eTrainingType)trainingType,
-                                          (TrainingMission::eDifficultyLevel)difficultyLevel))
+                                          static_cast<TrainingMission::eTrainingType>(trainingType),
+                                          static_cast<TrainingMission::eDifficultyLevel>(difficultyLevel)))
     {
         cout << "Training mission created." << endl;
     }
@@ -380,7 +380,7 @@ void updateMissionStatus(MilitarySystem& militarySystem)
         cout << "Mission not found." << endl;
         return;
     }
-    if (mission->setStatus((Mission::eMissionStatus)missionStatus))
+    if (mission->setStatus(static_cast<Mission::eMissionStatus>(missionStatus)))
     {
         cout << "Status updated." << endl;
     }
@@ -424,33 +424,33 @@ void createMockData(MilitarySystem& militarySystem)
     cout << "Creating mock data (batch " << s_mockBatch << ")..." << endl;
 
     // personnel: 4 soldiers (pnBase..+3) and 2 officers (+4, +5)
-    militarySystem.addSoldier("Avi" + tag,  Date(12, 3, 2001), "Rifleman", Soldier::eRank::PRIVATE);
-    militarySystem.addSoldier("Ben" + tag,  Date(30, 7, 2000), "Medic",    Soldier::eRank::CORPORAL);
-    militarySystem.addSoldier("Chen" + tag, Date(15, 1, 2002), "Driver",   Soldier::eRank::PRIVATE);
-    militarySystem.addSoldier("Dana" + tag, Date(9, 11, 1999), "Sniper",   Soldier::eRank::SERGEANT);
-    militarySystem.addOfficer("Gadi" + tag, Date(2, 6, 1993),  "Commander", Soldier::eRank::CAPTAIN);
-    militarySystem.addOfficer("Noa" + tag,  Date(21, 9, 1990), "OpsOfficer", Soldier::eRank::MAJOR);
+    militarySystem.addSoldier("Momo" + tag,  Date(12, 3, 2001), "Rifleman", Soldier::eRank::PRIVATE);
+    militarySystem.addSoldier("Bobo" + tag,  Date(30, 7, 2000), "Medic",    Soldier::eRank::CORPORAL);
+    militarySystem.addSoldier("Coco" + tag, Date(15, 1, 2002), "Driver",   Soldier::eRank::PRIVATE);
+    militarySystem.addSoldier("Dodo" + tag, Date(9, 11, 1999), "Sniper",   Soldier::eRank::SERGEANT);
+    militarySystem.addOfficer("Gogo" + tag, Date(2, 6, 1993),  "Commander", Soldier::eRank::CAPTAIN);
+    militarySystem.addOfficer("Nono" + tag,  Date(21, 9, 1990), "OpsOfficer", Soldier::eRank::MAJOR);
 
     // units and assignments
     militarySystem.addUnit("Alpha" + tag);   // unitBase
     militarySystem.addUnit("Bravo" + tag);   // unitBase + 1
-    militarySystem.assignSoldierToUnit(pnBase,     unitBase);      // Avi  - Alpha
-    militarySystem.assignSoldierToUnit(pnBase + 1, unitBase);      // Ben  - Alpha
-    militarySystem.assignSoldierToUnit(pnBase + 4, unitBase);      // Gadi - Alpha
-    militarySystem.assignSoldierToUnit(pnBase + 2, unitBase + 1);  // Chen - Bravo
-    militarySystem.assignSoldierToUnit(pnBase + 3, unitBase + 1);  // Dana - Bravo
+    militarySystem.assignSoldierToUnit(pnBase,     unitBase);      // Momo  - Alpha
+    militarySystem.assignSoldierToUnit(pnBase + 1, unitBase);      // Bobo  - Alpha
+    militarySystem.assignSoldierToUnit(pnBase + 4, unitBase);      // Gogo - Alpha
+    militarySystem.assignSoldierToUnit(pnBase + 2, unitBase + 1);  // Coco - Bravo
+    militarySystem.assignSoldierToUnit(pnBase + 3, unitBase + 1);  // Dodo - Bravo
 
     // officer command (linked list)
-    militarySystem.assignSoldierToOfficer(pnBase + 4, pnBase);      // Gadi commands Avi
-    militarySystem.assignSoldierToOfficer(pnBase + 4, pnBase + 1);  // Gadi commands Ben
-    militarySystem.assignSoldierToOfficer(pnBase + 5, pnBase + 2);  // Noa commands Chen
+    militarySystem.assignSoldierToOfficer(pnBase + 4, pnBase);      // Gogo commands Momo
+    militarySystem.assignSoldierToOfficer(pnBase + 4, pnBase + 1);  // Gogo commands Bobo
+    militarySystem.assignSoldierToOfficer(pnBase + 5, pnBase + 2);  // Nono commands Coco
 
     // vehicles via the factory
     militarySystem.addVehicle(VehicleFactory::eVehicleType::JEEP,  "J" + tag, 4, 0.0);
     militarySystem.addVehicle(VehicleFactory::eVehicleType::TRUCK, "T" + tag, 0, 500.0);
     militarySystem.addVehicle(VehicleFactory::eVehicleType::ARMORED_TRANSPORT,
                               "A" + tag, 8, 1200.0);
-    militarySystem.setVehicleDriver("J" + tag, pnBase + 2);         // Chen drives the jeep
+    militarySystem.setVehicleDriver("J" + tag, pnBase + 2);         // Coco drives the jeep
 
     // warehouse with equipment
     militarySystem.addWarehouse("Depot" + tag);
@@ -479,7 +479,7 @@ void createMockData(MilitarySystem& militarySystem)
 
     cout << "Mock data ready:" << endl;
     cout << "  Soldiers " << pnBase << "-" << pnBase + 3
-         << ", officers " << pnBase + 4 << " (Gadi) and " << pnBase + 5 << " (Noa)" << endl;
+         << ", officers " << pnBase + 4 << " (Gogo) and " << pnBase + 5 << " (Nono)" << endl;
     cout << "  Units " << unitBase << " (Alpha" << tag << ") and "
          << unitBase + 1 << " (Bravo" << tag << ")" << endl;
     cout << "  Vehicles J" << tag << ", T" << tag << ", A" << tag

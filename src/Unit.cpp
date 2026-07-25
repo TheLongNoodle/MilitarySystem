@@ -25,12 +25,12 @@ int Unit::getUnitId() const
 }
 int Unit::getSoldierCount() const
 {
-    return (int)soldiers.size();
+    return static_cast<int>(soldiers.size());
 }
 
 Soldier* Unit::getSoldier(int index) const
 {
-    if (index < 0 || index >= (int)soldiers.size())
+    if (index < 0 || index >= static_cast<int>(soldiers.size()))
     {
         return nullptr;
     }
@@ -53,7 +53,11 @@ bool Unit::addSoldier(Soldier* soldier)
     {
         return false;
     }
-    if (std::find(soldiers.begin(), soldiers.end(), soldier) != soldiers.end())
+    // Compare by domain identity (personal number) via Soldier::operator==,
+    // not by address - the same person must never be listed twice.
+    auto sameSoldier = [soldier](const Soldier* existing)
+                       { return *existing == *soldier; };
+    if (std::find_if(soldiers.begin(), soldiers.end(), sameSoldier) != soldiers.end())
     {
         return false;
     }

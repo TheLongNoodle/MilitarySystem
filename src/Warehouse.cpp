@@ -26,12 +26,12 @@ const std::string& Warehouse::getName() const
 
 int Warehouse::getEquipmentCount() const
 {
-    return (int)equipmentList.size();
+    return static_cast<int>(equipmentList.size());
 }
 
 Equipment* Warehouse::getEquipment(int index) const
 {
-    if (index < 0 || index >= (int)equipmentList.size())
+    if (index < 0 || index >= static_cast<int>(equipmentList.size()))
     {
         return nullptr;
     }
@@ -74,15 +74,17 @@ void Warehouse::printEquipment() const
 {
     std::cout << "  Warehouse '" << name
     << "' (" << equipmentList.size() << " item(s)):" << std::endl;
-    for (const Equipment* equipment : equipmentList)
+    // Indexed access here is deliberate: it exercises operator[], which is
+    // the class's own bounds-checked accessor, rather than the raw vector.
+    for (int i = 0; i < getEquipmentCount(); ++i)
     {
-        equipment->print();
+        std::cout << "    " << (*this)[i] << std::endl;
     }
 }
 
 const Equipment& Warehouse::operator[](int index) const
 {
-    if (index < 0 || index >= (int)equipmentList.size())
+    if (index < 0 || index >= static_cast<int>(equipmentList.size()))
     {
         throw std::out_of_range("Warehouse::operator[]: index out of range");
     }

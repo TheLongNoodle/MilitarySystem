@@ -45,17 +45,45 @@ void MilitarySystem::setMissionObserver(MissionObserver* observer)
     missionObserver = observer;
 }
 
+// Enlistment window: nobody serving was born before EARLIEST or after LATEST.
+// Comparing Date objects directly is what Date::operator< is for.
+static const Date EARLIEST_BIRTH_DATE(1, 1, 1940);
+static const Date LATEST_BIRTH_DATE(1, 1, 2010);
+
 bool MilitarySystem::isValidPersonInput(const std::string& name,
                                         const Date& birthDate,
                                         const std::string& role)
 {
-    return !name.empty() && !role.empty() && birthDate.isValid();
+    if (name.empty() || role.empty() || !birthDate.isValid())
+    {
+        return false;
+    }
+    return EARLIEST_BIRTH_DATE < birthDate && birthDate < LATEST_BIRTH_DATE;
+}
+
+// Two people with the same name and the same birth date are treated as the
+// same person; Date::operator== expresses that comparison.
+bool MilitarySystem::personExists(const std::string& name,
+                                  const Date& birthDate) const
+{
+    for (const Soldier* soldier : soldiers)
+    {
+        if (soldier->getName() == name && soldier->getBirthDate() == birthDate)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 bool MilitarySystem::addSoldier(const std::string& name, const Date& birthDate,
                                 const std::string& role, Soldier::eRank rank)
 {
     if (!isValidPersonInput(name, birthDate, role))
+    {
+        return false;
+    }
+    if (personExists(name, birthDate))
     {
         return false;
     }
@@ -67,6 +95,10 @@ bool MilitarySystem::addOfficer(const std::string& name, const Date& birthDate,
                                 const std::string& role, Soldier::eRank rank)
 {
     if (!isValidPersonInput(name, birthDate, role))
+    {
+        return false;
+    }
+    if (personExists(name, birthDate))
     {
         return false;
     }
@@ -149,10 +181,10 @@ bool MilitarySystem::assignSoldierToUnit(int personalNumber, int unitId)
         return false;
     }
 
-    if (!unit->addSoldier(soldier))
-    {
-        return false;
-    }
+    // A soldier with no unit cannot already be a member, so the duplicate
+    // check inside addSoldier cannot fail here - use the += operator, which
+    // reads as "this unit gains this soldier".
+    *unit += soldier;
     soldier->setUnit(unit);
 
     return true;
@@ -240,8 +272,6 @@ Warehouse* MilitarySystem::findWarehouseMutable(const std::string& name)
         const Warehouse* warehouse = base.getWarehouse(i);
         if (warehouse->getName() == name)
         {
-            // The facility getter is const-only; the system owns the base,
-            // so editing the found warehouse is legitimate here.
             return const_cast<Warehouse*>(warehouse);
         }
     }
@@ -292,9 +322,6 @@ void MilitarySystem::printAllWarehouses() const
 
 Vehicle* MilitarySystem::findVehicle(const std::string& vehicleNumber) const
 {
-    // The facility getter is const-only; the system owns the base, so
-    // handing a mutable vehicle to callers (driver/maintenance updates)
-    // is legitimate here.
     return const_cast<Vehicle*>(base.findVehicle(vehicleNumber));
 }
 
@@ -427,12 +454,12 @@ const BaseFacility& MilitarySystem::getBase() const
 
 int MilitarySystem::getUnitsCount() const
 {
-    return (int)units.size();
+    return static_cast<int>(units.size());
 }
 
 int MilitarySystem::getMissionsCount() const
 {
-    return (int)missions.size();
+    return static_cast<int>(missions.size());
 }
 
 void MilitarySystem::printAllUnits() const
@@ -468,7 +495,7 @@ Report MilitarySystem::generateReport() const
             ++activeMissions;
         }
     }
-    return Report((int)soldiers.size(), (int)units.size(), base.getVehicleCount(),
+    return Report(static_cast<int>(soldiers.size()), static_cast<int>(units.size()), base.getVehicleCount(),
                   equipmentCount, activeMissions);
 }
 

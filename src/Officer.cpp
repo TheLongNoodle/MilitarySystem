@@ -28,7 +28,9 @@ bool Officer::addCommandedSoldier(Soldier* soldier)
     for (LinkedList<Soldier*>::ConstIterator it = commandedSoldiers.begin();
          it != commandedSoldiers.end(); ++it)
     {
-        if (*it == soldier)
+        // Soldier::operator== compares personal numbers, so this rejects the
+        // same person even if a different pointer were ever used.
+        if (**it == *soldier)
         {
             return false;
         }

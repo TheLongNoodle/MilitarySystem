@@ -18,17 +18,17 @@ BaseFacility::~BaseFacility()
 
 int BaseFacility::getVehicleCount()   const
 {
-    return (int)vehicles.size();
+    return static_cast<int>(vehicles.size());
 }
 
 int BaseFacility::getWarehouseCount() const
 {
-    return (int)warehouses.size();
+    return static_cast<int>(warehouses.size());
 }
 
 const Vehicle* BaseFacility::getVehicle(int index) const
 {
-    if (index < 0 || index >= (int)vehicles.size())
+    if (index < 0 || index >= static_cast<int>(vehicles.size()))
     {
         return nullptr;
     }
@@ -37,7 +37,7 @@ const Vehicle* BaseFacility::getVehicle(int index) const
 
 const Warehouse* BaseFacility::getWarehouse(int index) const
 {
-    if (index < 0 || index >= (int)warehouses.size())
+    if (index < 0 || index >= static_cast<int>(warehouses.size()))
     {
         return nullptr;
     }

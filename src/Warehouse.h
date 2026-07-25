@@ -6,10 +6,6 @@
 
 class Equipment;
 
-// Part 3: name became std::string and the equipment array became a
-// std::vector. The destructor and the deleted copy operations REMAIN:
-// the warehouse owns the Equipment objects behind its pointers, so it must
-// delete them and must not be shallow-copied.
 class Warehouse
 {
 private:
